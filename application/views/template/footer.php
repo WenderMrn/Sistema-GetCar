@@ -3,7 +3,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2016</p>
+            <p>Copyright &copy; GetCar 2017</p>
         </div>
     </footer>
 

@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     Menu <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <i class="fa fa-play-circle"></i> <span class="light">Start</span> Bootstrap
+                    <i class="fa fa-car"></i> <span class="light">GETCAR</span>
                 </a>
             </div>
 
@@ -24,13 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#alugar">Alugar Carro</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a class="page-scroll" href="#download">Download</a>
-                    </li>
+                    </li> -->
                     <li>
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#contact">Quem Somos?</a>
                     </li>
                 </ul>
             </div>
@@ -40,16 +40,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro">
+    <header class="intro" style="background: url(assets/img/intro-car.jpg) no-repeat bottom center scroll;">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">Grayscale</h1>
-                        <p class="intro-text">A free, responsive, one page Bootstrap theme.
-                            <br>Created by Start Bootstrap.</p>
-                        <a href="#about" class="btn btn-circle page-scroll">
+                        <h1 class="brand-heading">Pegue aqui o seu carro</h1>
+                        <p class="intro-text">Veja como é facil alugar um carro.<br/></p>
+                        <!-- <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
+                        </a> -->
+                        <a href="#alugar" class="btn btn-primary btn-lg page-scroll" style="width: 500px;">
+                            TOQUE AQUI E SAIBA COMO!
                         </a>
                     </div>
                 </div>
@@ -58,19 +60,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </header>
 
     <!-- About Section -->
-    <section id="about" class="container content-section text-center">
+    <section id="alugar" class="container content-section text-center">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>About Grayscale</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+            <div class="col-lg-6">
+                <h2>Não tem cadastro na GETCAR?</h2>
+                <h4><span class="light">Cadastre-se, é </span>facil <span class="light">e</span> rápido!</h4>
+                <a href="" class="btn btn-lg btn-primary">CADASTRE-SE</a>
+            </div>
+            <div class="col-lg-6">
+                <h2>Já é cadastrado?</h2>
+                <h4><span class="light">Faça o </span>login</h4>
+                <a href="" class="btn btn-lg btn-success">FAZER LOGIN</a>
             </div>
         </div>
     </section>
 
+
+
     <!-- Download Section -->
-    <section id="download" class="content-section text-center">
+    <!-- <section id="download" class="content-section text-center">
         <div class="download-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
@@ -80,15 +88,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Contact Section -->
     <section id="contact" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact Start Bootstrap</h2>
-                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
+                <h2>Alguma dúvida?</h2>
+                <p>Fique a vontade para nos deixar uma mensagem!</p>
+                <p><a href="mailto:contato@getcar.com.br">contato@getcar.com.br</a>
                 </p>
                 <ul class="list-inline banner-social-buttons">
                     <li>
