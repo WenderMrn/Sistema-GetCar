@@ -1,20 +1,22 @@
 
     <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <?php echo script_tag('bower_components/jquery/dist/jquery.min.js'); ?>
+    
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <?php echo script_tag('bower_components/bootstrap/dist/js/bootstrap.min.js'); ?>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+    <?php echo script_tag('vendor/components/metismenu/dist/metisMenu.min.js'); ?>
+    
 
     <!-- Morris Charts JavaScript -->
-    <script src="assets/js/raphael.min.js"></script>
-    <script src="assets/js/morris.min.js"></script>
-    <script src="assets/js/morris-data.js"></script>
+    <?php echo script_tag('assets/js/raphael.min.js'); ?>
+    <?php echo script_tag('assets/js/morris.min.js'); ?>
+    <?php //echo script_tag('assets/js/morris-data.js'); ?>
 
     <!-- Custom Theme JavaScript -->
-    <script src="assets/js/sb-admin-2.js"></script>
+    <?php echo script_tag('assets/js/sb-admin-2.js'); ?>
 
 </body>
 

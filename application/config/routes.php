@@ -54,13 +54,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 
 //AUTENTICACAO
-$route['autenticacao/login'] = 'autenticacao/login';
+$route['login'] = 'autenticacao/login';
 
 //CRUD ADMINISTRADOR
 $route['painel/administradores'] = 'administrador/listar';
 
 //MIGRATION
-$route['instalar'] = 'migrate';
+$route['install'] = 'migrate/index';
 
 
 $route['404_override'] = '';

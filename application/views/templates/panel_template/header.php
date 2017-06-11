@@ -16,17 +16,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title>GetCar</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <?php echo link_tag('bower_components/bootstrap/dist/css/bootstrap.min.css'); ?>
+    <?php echo link_tag('bower_components/font-awesome/css/font-awesome.min.css'); ?>
+    <?php echo link_tag('vendor/components/metismenu/dist/metisMenu.min.css'); ?>
+    <?php echo link_tag('assets/css/sb-admin-2.css'); ?>
+    <?php echo link_tag('assets/css/morris.css'); ?>
+    <!-- <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Custom Fonts -->
-    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
 
     <!-- Theme CSS -->
-    <link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-    <link href="assets/css/sb-admin-2.css" rel="stylesheet">
-    <link href="assets/css/morris.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
 
     <!-- Intro Header -->
-    <header class="intro" style="background: url(assets/img/intro-car.jpg) no-repeat bottom center scroll;">
+    <header class="intro" style="background: url(<?php echo base_url('assets/img/intro-car.jpg'); ?>) no-repeat bottom center scroll;">
         <div class="intro-body">
             <div class="container">
                 <div class="row">
@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-6">
                 <h2>Já é cadastrado?</h2>
                 <h4><span class="light">Faça o </span>login</h4>
-                <a href="" class="btn btn-lg btn-success">FAZER LOGIN</a>
+                <?php echo anchor('login', 'FAZER LOGIN', array('class' => 'btn btn-lg btn-success')); ?>
             </div>
         </div>
     </section>
