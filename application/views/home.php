@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <a class="page-scroll" href="#download">Download</a>
                     </li> -->
                     <li>
-                        <a class="page-scroll" href="#contact">Quem Somos?</a>
+                        <a class="page-scroll" href="#contact">Contato</a>
                     </li>
                 </ul>
             </div>

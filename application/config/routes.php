@@ -50,8 +50,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-//LOGIN
+//HOME
 $route['default_controller'] = 'home';
+
+//AUTENTICACAO
+$route['autenticacao/login'] = 'autenticacao/login';
+
+//CRUD ADMINISTRADOR
+$route['painel/administradores'] = 'administrador/listar';
+
+//MIGRATION
+$route['instalar'] = 'migrate';
 
 
 $route['404_override'] = '';
