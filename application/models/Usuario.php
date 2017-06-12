@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Administrador extends CI_Model {
+class Usuario extends CI_Model {
 
         public $id;
         public $nome;
@@ -12,14 +12,14 @@ class Administrador extends CI_Model {
 
         public function getAll()
         {
-            $query = $this->db->get('administrador');
+            $query = $this->db->get('usuario');
             return $query->result_array();
         }
 
         public function getById($id)
         {
             // $query = $this->db->get('administrador');
-            $query = $this->db->get_where('administrador', array('id' => $id));
+            $query = $this->db->get_where('usuario', array('id' => $id));
             return $query->result_array();
         }
 
@@ -35,13 +35,13 @@ class Administrador extends CI_Model {
             $this->cpf     = $_POST['cpf'];
             $this->senha     = md5($_POST['senha']);
 
-            $this->db->insert('administrador', $this);
+            $this->db->insert('usuario', $this);
         }
 
         public function delete()
         {
             $this->db->where('id', $_POST['id']);
-            return $this->db->delete('administrador');
+            return $this->db->delete('usuario');
         }
 
         public function validate(){
@@ -51,7 +51,7 @@ class Administrador extends CI_Model {
             // $result = $this->db->get_where(array('email' => $this->email, 'senha' => $this->senha));
             $result = $this->db->select(array('id', 'nome', 'email'))
                     ->where(array('email' => $this->email, 'senha' => $this->senha))
-                    ->get('administrador');
+                    ->get('usuario');
             
             if($result->result_array()){
                     return $result->result_array()[0];
@@ -64,17 +64,17 @@ class Administrador extends CI_Model {
         public function update()
         {
             $this->id     = $_POST['id'];
-            $this->nome    = $_POST['nome']; // please read the below note
+            $this->nome    = $_POST['nome']; 
             $this->email  = $_POST['email'];
             $this->cpf     = $_POST['cpf'];
             if(isset($_POST['senha']) && !empty($_POST['senha'])){
                     $this->senha = md5($_POST['senha']);
             }else{
-                    $query = $this->db->get_where('administrador', array('id' => $_POST['id']));
+                    $query = $this->db->get_where('usuario', array('id' => $_POST['id']));
                     $this->senha = $query->result_array()[0]['senha'];
             }
 
-            $this->db->update('administrador', $this, array('id' => $_POST['id']));
+            $this->db->update('usuario', $this, array('id' => $_POST['id']));
         }
 
 }
