@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Administrador extends CI_Model {
 
+        private $table_name = "administrador";
+
         public $id;
         public $nome;
         public $email;
@@ -21,6 +23,24 @@ class Administrador extends CI_Model {
             // $query = $this->db->get('administrador');
             $query = $this->db->get_where('administrador', array('id' => $id));
             return $query->result_array();
+        }
+
+        public function email_check($email){
+            
+            $query = $this->db->select('*')
+                ->where('email', $email)
+                ->get($this->table_name);
+
+            return !empty($query->result_array());
+        }
+
+        public function cpf_check($cpf){
+            
+            $query = $this->db->select('*')
+                ->where('cpf', $cpf)
+                ->get($this->table_name);
+
+            return !empty($query->result_array());
         }
 
         public function __construct()

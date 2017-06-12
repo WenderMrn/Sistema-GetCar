@@ -83,8 +83,8 @@ class Painel extends CI_Controller {
 		$this->load->library('form_validation');
 
         $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_cpf_check');
         $this->form_validation->set_rules('senha', 'Senha', 'required');
         
         if ($this->form_validation->run() == TRUE){
@@ -94,9 +94,19 @@ class Painel extends CI_Controller {
         }else{
         	$this->admin_add();
         }
-        
 
+	}
 
+	public function email_check($email){
+		$this->load->model('administrador');
+
+		return $this->administrador->email_check($email);		
+	}
+
+	public function cpf_check($cpf){
+		$this->load->model('administrador');
+
+		return $this->administrador->cpf_check($cpf);		
 	}
 
 	public function admin_delete(){
