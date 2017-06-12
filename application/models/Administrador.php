@@ -31,7 +31,7 @@ class Administrador extends CI_Model {
                 ->where('email', $email)
                 ->get($this->table_name);
 
-            return !empty($query->result_array());
+            return empty($query->result_array());
         }
 
         public function cpf_check($cpf){
@@ -40,7 +40,7 @@ class Administrador extends CI_Model {
                 ->where('cpf', $cpf)
                 ->get($this->table_name);
 
-            return !empty($query->result_array());
+            return empty($query->result_array());
         }
 
         public function __construct()

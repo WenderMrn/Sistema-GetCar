@@ -83,8 +83,16 @@ class Painel extends CI_Controller {
 		$this->load->library('form_validation');
 
         $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_cpf_check');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check',
+        	array(
+        		'email_check' => 'Email já cadastrado'
+        		)
+        );
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_cpf_check',
+        	array(
+        		'cpf_check' => 'CPF já cadastrado'
+        		)
+        );
         $this->form_validation->set_rules('senha', 'Senha', 'required');
         
         if ($this->form_validation->run() == TRUE){
