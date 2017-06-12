@@ -23,7 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+// $config['base_url'] = '';
+
+//necessario usar essa config caso rode no wamp com portas
+$config['base_url'] = 'http://'. $_SERVER['HTTP_HOST'].'/getcar/';
 
 /*
 |--------------------------------------------------------------------------

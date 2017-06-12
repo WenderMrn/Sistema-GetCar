@@ -18,7 +18,7 @@ class Migrate extends CI_Controller
                 	$this->db->truncate('administrador');
                 	$admin_data = array(
                         'nome' => 'Administrador',
-                        'email' => 'admin@',
+                        'email' => 'admin@admin.com',
                         'cpf' => '000.000.000-00',
                         'senha' => md5('123')
                 	);
@@ -27,7 +27,7 @@ class Migrate extends CI_Controller
 
                     $admin_data = array(
                         'nome' => 'Rafael Cruz',
-                        'email' => 'rafael@',
+                        'email' => 'rafael@admin.com',
                         'cpf' => '111.111.111-11',
                         'senha' => md5('123')
                     );
@@ -36,7 +36,7 @@ class Migrate extends CI_Controller
 
                     $admin_data = array(
                         'nome' => 'Wender',
-                        'email' => 'wender@',
+                        'email' => 'wender@admin.com',
                         'cpf' => '222.222.222-22',
                         'senha' => md5('123')
                     );
@@ -45,7 +45,7 @@ class Migrate extends CI_Controller
 
                     $admin_data = array(
                         'nome' => 'Vicente Correia',
-                        'email' => 'vicente@',
+                        'email' => 'vicente@admin.com',
                         'cpf' => '333.333.333-33',
                         'senha' => md5('123')
                     );
@@ -54,7 +54,7 @@ class Migrate extends CI_Controller
 
                     $admin_data = array(
                         'nome' => 'Lucas Schulze',
-                        'email' => 'lucas@',
+                        'email' => 'lucas@admin.com',
                         'cpf' => '444.444.444-44',
                         'senha' => md5('123')
                     );
