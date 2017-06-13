@@ -43,15 +43,13 @@
                                                 <td><?php echo $row['nome']; ?></td>
                                                 <td><?php echo $row['email']; ?></td>
                                                 <td>
+                                                    <?php echo anchor('painel/administradores/editar/' . $row['id'], 'Editar', array('class' => 'btn btn-primary')); ?>
                                                     <?php   
                                                         //codigo para tratar se o admin é o atual logado
-                                                        //if($this->session->userdata('id') != $row['id']): 
+                                                        if($this->session->userdata('id') != $row['id']): 
                                                     ?>
-                                                        <?php echo anchor('painel/administradores/editar/' . $row['id'], 'Editar', array('class' => 'btn btn-primary')); ?>
                                                         <?php echo anchor('painel/administradores/deletar/' . $row['id'], 'Deletar', array('class' => 'btn btn-danger')); ?>
-                                                    <?php //else: ?>
-                                                        <!-- É você -->
-                                                    <?php //endif; ?>
+                                                    <?php endif; ?>
                                                 </td>
                                                 
                                             </tr>
