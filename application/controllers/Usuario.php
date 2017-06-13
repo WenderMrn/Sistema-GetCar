@@ -26,7 +26,7 @@ class Usuario extends CI_Controller {
 			$this->load->view('painel/user_edit', $data);
 			$this->load->view('templates/panel_template/footer');
 		}else{
-			$this->user_list();
+			return false;
 		}
 
 

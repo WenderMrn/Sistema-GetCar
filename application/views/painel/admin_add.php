@@ -34,7 +34,7 @@
                                             <input class="form-control" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
                                         </div>
 
-                                        <?php echo form_submit('btn_add_admin', 'Cadastrar', array('class' => 'btn btn-primary')); ?>
+                                        
                                         
                                     </div>
                                 
@@ -51,6 +51,14 @@
                                         </div>
                                         
                                         
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <div class="form-group">
+                                                <?php echo form_submit('btn_add_admin', 'Cadastrar', array('class' => 'btn btn-primary')); ?>  
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php echo form_close(); ?>
                                 
