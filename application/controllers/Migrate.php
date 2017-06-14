@@ -11,12 +11,14 @@ class Migrate extends CI_Controller
                 // $this->dbforge->create_database($this->db->database, TRUE);
                 // $this->dbforge->drop_table('administrador', TRUE);
 
-                if ($this->migration->current() === FALSE)
+                if ($this->migration->version(1) === FALSE)
                 {
                     show_error($this->migration->error_string());
                 }else{
-                	$this->db->truncate('administrador');
-                	$admin_data = array(
+                    $this->db->truncate('administrador');
+                	// $this->db->truncate('usuario');
+                	
+                    $admin_data = array(
                         'nome' => 'Administrador',
                         'email' => 'admin@admin.com',
                         'cpf' => '000.000.000-00',
@@ -61,7 +63,14 @@ class Migrate extends CI_Controller
 
                     $this->db->insert('administrador', $admin_data);
 
-                	echo "Instalacao concluida";
+                    echo "<h3>Migração administrador concluida</h3>";
+                }
+
+                if ($this->migration->version(2) === FALSE)
+                {
+                    show_error($this->migration->error_string());
+                }else{
+                	echo "<h3>Migração usuario concluida</h3>";
                 }
         }
 

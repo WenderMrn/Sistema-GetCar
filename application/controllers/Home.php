@@ -9,4 +9,11 @@ class Home extends CI_Controller {
 		$this->load->view('home');
 		$this->load->view('templates/home_template/footer');
 	}
+
+	public function cadastrar(){
+		$this->load->view('templates/panel_template/header');
+		$this->load->view('cadastrar');
+		$this->load->view('templates/panel_template/footer');
+	}
+
 }

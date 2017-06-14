@@ -65,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-lg-6">
                 <h2>Não tem cadastro na GETCAR?</h2>
                 <h4><span class="light">Cadastre-se, é </span>facil <span class="light">e</span> rápido!</h4>
-                <a href="" class="btn btn-lg btn-primary">CADASTRE-SE</a>
+                <?php echo anchor('cadastrar', 'CADASTRE-SE', array('class' => 'btn btn-lg btn-primary')); ?>
             </div>
             <div class="col-lg-6">
                 <h2>Já é cadastrado?</h2>

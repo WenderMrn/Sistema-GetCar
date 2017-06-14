@@ -56,6 +56,9 @@ $route['default_controller'] = 'home';
 //AUTENTICACAO
 $route['login'] = 'autenticacao/login';
 
+//CADASTRAR USUARIO
+$route['cadastrar'] = 'home/cadastrar';
+
 //CRUD ADMINISTRADOR
 $route['painel/administradores'] = 'painel/admin_list';
 $route['painel/administradores/editar/:num'] = 'painel/admin_edit';
@@ -67,13 +70,13 @@ $route['painel/admin_delete_post'] = 'painel/admin_delete_post';
 
 
 //CRUD USUÁRIO
-$route['painel/administradores'] = 'painel/admin_list';
-$route['painel/administradores/editar/:num'] = 'painel/admin_edit';
-$route['painel/admin_edit_post'] = 'painel/admin_edit_post';
-$route['painel/administradores/adicionar'] = 'painel/admin_add';
-$route['painel/admin_add_post'] = 'painel/admin_add_post';
-$route['painel/administradores/deletar/:num'] = 'painel/admin_delete';
-$route['painel/admin_delete_post'] = 'painel/admin_delete_post';
+// $route['painel/administradores'] = 'painel/admin_list';
+// $route['painel/administradores/editar/:num'] = 'painel/admin_edit';
+// $route['painel/admin_edit_post'] = 'painel/admin_edit_post';
+// $route['painel/administradores/adicionar'] = 'painel/admin_add';
+// $route['painel/admin_add_post'] = 'painel/admin_add_post';
+// $route['painel/administradores/deletar/:num'] = 'painel/admin_delete';
+// $route['painel/admin_delete_post'] = 'painel/admin_delete_post';
 
 //MIGRATION
 $route['install'] = 'migrate/index';
