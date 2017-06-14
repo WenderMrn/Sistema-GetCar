@@ -33,7 +33,7 @@
                                 <div class="col-lg-4 col-lg-offset-2"><button class="btn btn-success btn-lg btn-block btn_to_action_form">SIM</button></div>
                                 <div class="col-lg-4"><?php echo anchor('painel/administradores', 'NÃO', array('class' => 'btn btn-danger btn-lg btn-block')); ?></div>
                             </div>
-                            <?php echo form_open('painel/admin_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => $id)); ?>
+                            <?php echo form_open('painel_controller/admin_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => $id)); ?>
                             <?php echo form_close(); ?>
                             <!-- /.row (nested) -->
                         </div>

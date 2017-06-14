@@ -11,7 +11,7 @@
                                 <?php echo $this->session->flashdata('error_login'); ?>
                             </div>
                         <?php endif; ?>
-                        <?php echo form_open('autenticacao/validar_login'); ?>
+                        <?php echo form_open('autenticacao_controller/validar_login'); ?>
                             <fieldset>
                                 <div class="form-group">
                                     <?php echo form_input(

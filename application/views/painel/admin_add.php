@@ -22,7 +22,7 @@
                         
                         <div class="panel-body">
                             <div class="row">
-                                <?php echo form_open('painel/admin_add_post'); ?>
+                                <?php echo form_open('painel_controller/admin_add_post'); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome</label>

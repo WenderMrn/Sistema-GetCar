@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Painel extends CI_Controller {
+class Painel_controller extends CI_Controller {
 
 	public function index()
 	{
@@ -13,10 +13,10 @@ class Painel extends CI_Controller {
 
 	//ADMIN ACTIONS
 	public function admin_list(){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
 		$data = array();
-		$data['administradores'] = $this->administrador->getAll();
+		$data['administradores'] = $this->administrador_model->getAll();
 
 
 		$this->load->view('templates/panel_template/header');
@@ -25,12 +25,12 @@ class Painel extends CI_Controller {
 	}
 
 	public function admin_edit(){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
 		$id = $this->uri->segment(4);
 
 		$data = array();
-		$result = $this->administrador->getById($id);
+		$result = $this->administrador_model->getById($id);
 		
 		if(!empty($result)){
 			$data['admin_data'] = $result[0];
@@ -46,7 +46,7 @@ class Painel extends CI_Controller {
 	}
 
 	public function admin_edit_post(){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
 		$this->load->library('form_validation');
 
@@ -55,7 +55,7 @@ class Painel extends CI_Controller {
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required');
         
         if ($this->form_validation->run() == TRUE){
-        	$this->administrador->update();
+        	$this->administrador_model->update();
             $this->session->set_flashdata('success', 'Dados salvos com sucesso!');
         }else{
             $this->session->set_flashdata('errors', validation_errors());
@@ -78,7 +78,7 @@ class Painel extends CI_Controller {
 	}
 
 	public function admin_add_post(){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
 		$this->load->library('form_validation');
 
@@ -96,7 +96,7 @@ class Painel extends CI_Controller {
         $this->form_validation->set_rules('senha', 'Senha', 'required');
         
         if ($this->form_validation->run() == TRUE){
-        	$this->administrador->insert();
+        	$this->administrador_model->insert();
             $this->session->set_flashdata('success', 'Administrador cadastrado com sucesso!');
         	redirect('painel/administradores/','refresh');
         }else{
@@ -106,25 +106,25 @@ class Painel extends CI_Controller {
 	}
 
 	public function email_check($email){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
-		return $this->administrador->email_check($email);		
+		return $this->administrador_model->email_check($email);		
 	}
 
 	public function cpf_check($cpf){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
-		return $this->administrador->cpf_check($cpf);		
+		return $this->administrador_model->cpf_check($cpf);		
 	}
 
 	public function admin_delete(){
 
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
 		$id = $this->uri->segment(4);
 
 		$data = array();
-		$result = $this->administrador->getById($id);
+		$result = $this->administrador_model->getById($id);
 		
 		if(!empty($result)){
 			$data = $result[0];
@@ -139,9 +139,9 @@ class Painel extends CI_Controller {
 	}
 
 	public function admin_delete_post(){
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
 
-        if ($this->administrador->delete()){
+        if ($this->administrador_model->delete()){
             $this->session->set_flashdata('success', 'Administrador deletado com sucesso!');
         }
         redirect('painel/administradores/','refresh');

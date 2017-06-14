@@ -50,7 +50,7 @@ class Usuario_controller extends CI_Controller {
 	public function register_user_home(){
 		if($this->addUser()){
 			$this->session->set_flashdata('success_register', 'O pré-cadastro foi realizado com sucesso, por favor, aguarde alguns minutos para efetuar o login, enquanto o sistema valida o seu cadastro.');
-			redirect('home/cadastrar','refresh');
+			redirect('home_controller/cadastrar','refresh');
 		}
 		$this->load->view('templates/panel_template/header');
 		$this->load->view('cadastrar', $this->input->post());

@@ -25,7 +25,7 @@
                         
                         <div class="panel-body">
                             <div class="row">
-                                <?php echo form_open('painel/admin_edit_post', '', array('id' => $admin_data['id'])); ?>
+                                <?php echo form_open('painel_controller/admin_edit_post', '', array('id' => $admin_data['id'])); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome</label>

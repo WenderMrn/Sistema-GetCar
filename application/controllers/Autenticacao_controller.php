@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Autenticacao extends CI_Controller {
+class Autenticacao_controller extends CI_Controller {
 
 	public function index()
 	{
@@ -19,13 +19,13 @@ class Autenticacao extends CI_Controller {
 
 	public function validar_login(){
 
-		$this->load->model('administrador');
+		$this->load->model('administrador_model');
         
-		$result = $this->administrador->validate();
+		$result = $this->administrador_model->validate();
 		
 		if($result){
 			$this->session->set_userdata($result);
-			redirect('painel','refresh');
+			redirect('painel_controller','refresh');
 		}else{
 			// $this->form_validation->set_message('invalid_pass_or_email', 'Email ou senha inválidos.');
 			$this->session->set_flashdata('error_login', 'Email ou senha inválidos.');
