@@ -212,7 +212,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><?php echo anchor('admin/logoff', '<i class="fa fa-sign-out fa-fw"></i> Logout'); ?>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -310,7 +310,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href=""><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -320,8 +320,8 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                            
+                        </li> -->
                         <li>
                             
                             <?php echo anchor('painel/usuarios', '<i class="fa fa-user fa-fw"></i> Usuários</span>'); ?>
