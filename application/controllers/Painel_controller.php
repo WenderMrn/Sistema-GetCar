@@ -264,7 +264,7 @@ class Painel_controller extends CI_Controller {
         }
 
         $this->form_validation->set_rules('endereco', 'Endereço', 'required');
-        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[10]');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[9]');
         $this->form_validation->set_rules('cartao_credito', 'Cartão de Crédito', 'required|numeric');
         
         if ($this->form_validation->run() == TRUE){
@@ -317,7 +317,7 @@ class Painel_controller extends CI_Controller {
         );
         $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[6]');
         $this->form_validation->set_rules('endereco', 'Endereço', 'required');
-        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[10]');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[9]');
         $this->form_validation->set_rules('cartao_credito', 'Cartão de Crédito', 'required|numeric');
         
         if ($this->form_validation->run() == TRUE){
