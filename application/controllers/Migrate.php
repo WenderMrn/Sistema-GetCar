@@ -75,7 +75,7 @@ class Migrate extends CI_Controller
                     // $this->db->truncate('usuario');
                     
                     $admin_data = array(
-                        'nome' => 'Usuario Um',
+                        'nome' => 'Rodrigo da Silva',
                         'email' => 'user1@user.com',
                         'cpf' => '472.787.960-32',
                         'cep' => '58000-000',
@@ -88,7 +88,7 @@ class Migrate extends CI_Controller
                     $this->db->insert('usuario', $admin_data);
 
                     $admin_data = array(
-                        'nome' => 'Usuario Dois',
+                        'nome' => 'Filomena da Costa',
                         'email' => 'user2@user.com',
                         'cpf' => '028.895.360-68',
                         'cep' => '58000-000',
@@ -101,7 +101,7 @@ class Migrate extends CI_Controller
                     $this->db->insert('usuario', $admin_data);
 
                     $admin_data = array(
-                        'nome' => 'User Tres',
+                        'nome' => 'Ednaldo Pereira',
                         'email' => 'user3@user.com',
                         'cpf' => '275.387.170-13',
                         'cep' => '58000-000',
@@ -114,7 +114,7 @@ class Migrate extends CI_Controller
                     $this->db->insert('usuario', $admin_data);
 
                     $admin_data = array(
-                        'nome' => 'User Quatro',
+                        'nome' => 'Niegas Barros',
                         'email' => 'user4@user.com',
                         'cpf' => '254.464.300-50',
                         'cep' => '58000-000',
@@ -127,7 +127,7 @@ class Migrate extends CI_Controller
                     $this->db->insert('usuario', $admin_data);
 
                     $admin_data = array(
-                        'nome' => 'User Cinco',
+                        'nome' => 'Marlon Eugenio',
                         'email' => 'user5@user.com',
                         'cpf' => '279.330.370-46',
                         'cep' => '58000-000',
