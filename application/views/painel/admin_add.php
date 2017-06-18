@@ -31,7 +31,7 @@
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
+                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
                                         </div>
 
                                         

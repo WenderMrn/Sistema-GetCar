@@ -33,7 +33,7 @@ class Painel_controller extends CI_Controller {
 		$result = $this->administrador_model->getById($id);
 		
 		if(!empty($result)){
-			$data['admin_data'] = $result[0];
+			$data = $result[0];
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_edit', $data);
@@ -50,20 +50,32 @@ class Painel_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required');
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo, sem numeros)')
+        );
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[8]');
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf',
+        	array(
+        		'user_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
+        		)
+        );
+
+        if(!empty($this->input->post('senha'))) {
+        	$this->form_validation->set_rules('senha', 'Senha', 'min_length[6]');
+        }
         
         if ($this->form_validation->run() == TRUE){
         	$this->administrador_model->update();
             $this->session->set_flashdata('success', 'Dados salvos com sucesso!');
-        }else{
-            $this->session->set_flashdata('errors', validation_errors());
-
+        	redirect('painel/administradores/editar/' . $this->input->post('id'),'refresh');
         }
 
-        redirect('painel/administradores/editar/' . $this->input->post('id'),'refresh');
-
+        $this->session->set_flashdata('errors', validation_errors());
+        $this->load->view('templates/panel_template/header');
+		$this->load->view('painel/admin_edit', $this->input->post());
+		$this->load->view('templates/panel_template/footer');
 
 	}
 
@@ -82,18 +94,21 @@ class Painel_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_admin_email_check',
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo, sem numeros)')
+        );
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[8]|callback_admin_email_check',
         	array(
         		'admin_email_check' => 'Email já cadastrado'
         		)
         );
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_admin_cpf_check',
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[14]|callback_valida_cpf|callback_admin_cpf_check',
         	array(
-        		'admin_cpf_check' => 'CPF já cadastrado'
+        		'admin_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
         		)
         );
-        $this->form_validation->set_rules('senha', 'Senha', 'required');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[6]');
         
         if ($this->form_validation->run() == TRUE){
         	$this->administrador_model->insert();

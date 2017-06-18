@@ -97,21 +97,22 @@ class Usuario_model extends CI_Model {
 
         public function update()
         {
-            $this->nome             = $_POST['nome'];
-            $this->email            = $_POST['email'];
-            $this->cpf              = $_POST['cpf'];
-            $this->cep              = $_POST['cep'];
-            $this->cartao_credito   = $_POST['cartao_credito'];
-            $this->endereco         = $_POST['endereco'];
+            $this->id             = $this->input->post('id');
+            $this->nome             = $this->input->post('nome');
+            $this->email            = $this->input->post('email');
+            $this->cpf              = $this->input->post('cpf');
+            $this->cep              = $this->input->post('cep');
+            $this->cartao_credito   = $this->input->post('cartao_credito');
+            $this->endereco         = $this->input->post('endereco');
 
-            if(isset($_POST['senha']) && !empty($_POST['senha'])){
-                    $this->senha = md5($_POST['senha']);
+            if(!empty($this->input->post('senha'))){
+                    $this->senha = md5($this->input->post('senha'));
             }else{
-                    $query = $this->db->get_where('usuario', array('id' => $_POST['id']));
+                    $query = $this->db->get_where('usuario', array('id' => $this->input->post('id')));
                     $this->senha = $query->result_array()[0]['senha'];
             }
 
-            $this->db->update('usuario', $this, array('id' => $_POST['id']));
+            $this->db->update('usuario', $this);
         }
 
 }

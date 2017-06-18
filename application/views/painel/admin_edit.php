@@ -25,16 +25,16 @@
                         
                         <div class="panel-body">
                             <div class="row">
-                                <?php echo form_open('painel_controller/admin_edit_post', '', array('id' => $admin_data['id'])); ?>
+                                <?php echo form_open('painel_controller/admin_edit_post', '', array('id' => $id)); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome</label>
-                                            <input class="form-control" name="nome" id="nome" value="<?php echo $admin_data['nome']; ?>">
+                                            <input class="form-control" name="nome" id="nome" value="<?php echo $nome; ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" name="cpf" id="cpf" value="<?php echo $admin_data['cpf']; ?>">
+                                            <input class="form-control formataCPF" name="cpf" maxlength="14" id="cpf" value="<?php echo $cpf; ?>">
                                         </div>
 
                                         
@@ -45,12 +45,12 @@
                                         
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $admin_data['email']; ?>">
+                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>Senha</label>
-                                            <input type="password" name="" id="" class="form-control">
+                                            <input type="password" name="senha" id="senha" class="form-control">
                                         </div>
                                         
                                         

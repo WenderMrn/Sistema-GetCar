@@ -79,18 +79,18 @@ class Administrador_model extends CI_Model {
 
         public function update()
         {
-            $this->id     = $_POST['id'];
-            $this->nome    = $_POST['nome']; // please read the below note
-            $this->email  = $_POST['email'];
-            $this->cpf     = $_POST['cpf'];
-            if(isset($_POST['senha']) && !empty($_POST['senha'])){
-                    $this->senha = md5($_POST['senha']);
+            $this->id     = $this->input->post('id');
+            $this->nome    = $this->input->post('nome'); 
+            $this->email  = $this->input->post('email');
+            $this->cpf     = $this->input->post('cpf');
+            if(!empty($this->input->post('senha'))){
+                    $this->senha = md5($this->input->post('senha'));
             }else{
-                    $query = $this->db->get_where('administrador', array('id' => $_POST['id']));
+                    $query = $this->db->get_where('administrador', array('id' => $this->input->post('id')));
                     $this->senha = $query->result_array()[0]['senha'];
             }
 
-            $this->db->update('administrador', $this, array('id' => $_POST['id']));
+            $this->db->update('administrador', $this, array('id' => $this->input->post('id')));
         }
 
 }
