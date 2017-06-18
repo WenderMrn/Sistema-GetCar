@@ -25,6 +25,10 @@ class Migration_Add_usuario extends CI_Migration {
                                 'type' => 'VARCHAR',
                                 'constraint' => '50',
                         ),
+                        'cep' => array(
+                                'type' => 'VARCHAR',
+                                'constraint' => '50',
+                        ),
                         'senha' => array(
                                 'type' => 'VARCHAR',
                                 'constraint' => '100',

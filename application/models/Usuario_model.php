@@ -10,6 +10,7 @@ class Usuario_model extends CI_Model {
         public $nome;
         public $email;
         public $cpf;
+        public $cep;
         public $senha;
         public $cartao_credito;
         public $endereco;
@@ -37,6 +38,7 @@ class Usuario_model extends CI_Model {
             $this->nome             = $_POST['nome']; // please read the below note
             $this->email            = $_POST['email'];
             $this->cpf              = $_POST['cpf'];
+            $this->cep              = $_POST['cep'];
             $this->cartao_credito   = $_POST['cartao_credito'];
             $this->endereco         = $_POST['endereco'];
             $this->aprovado         = 0;
@@ -95,10 +97,13 @@ class Usuario_model extends CI_Model {
 
         public function update()
         {
-            $this->id     = $_POST['id'];
-            $this->nome    = $_POST['nome']; 
-            $this->email  = $_POST['email'];
-            $this->cpf     = $_POST['cpf'];
+            $this->nome             = $_POST['nome'];
+            $this->email            = $_POST['email'];
+            $this->cpf              = $_POST['cpf'];
+            $this->cep              = $_POST['cep'];
+            $this->cartao_credito   = $_POST['cartao_credito'];
+            $this->endereco         = $_POST['endereco'];
+
             if(isset($_POST['senha']) && !empty($_POST['senha'])){
                     $this->senha = md5($_POST['senha']);
             }else{

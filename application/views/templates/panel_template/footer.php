@@ -17,6 +17,7 @@
 
     <!-- Custom Theme JavaScript -->
     <?php echo script_tag('assets/js/sb-admin-2.js'); ?>
+    <?php echo script_tag('assets/js/script.js'); ?>
 
 </body>
 

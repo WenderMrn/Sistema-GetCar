@@ -22,6 +22,7 @@
 
     <!-- Theme JavaScript -->
     <?php script_tag('assets/js/grayscale.min.js'); ?>
+    <?php echo script_tag('assets/js/script.js'); ?>
 
 </body>
 

@@ -186,7 +186,7 @@ class Painel_controller extends CI_Controller {
 	public function user_edit(){
 		$this->load->model('usuario_model');
 
-		$id = $this->uri->segment(4);
+		$id = $this->uri->segment(4);		
 
 		$data = array();
 		$result = $this->usuario_model->getById($id);
@@ -209,19 +209,44 @@ class Painel_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required');
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo)')
+        );
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[8]',
+        	array(
+        		'email_check' => "Email já cadastrado"
+        		)
+        );
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf',
+        	array(
+        		'user_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
+        		)
+        );
+
+        if(!empty($this->input->post('senha'))) {
+        	$this->form_validation->set_rules('senha', 'Senha', 'min_length[6]');
+        }
+
+        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[10]');
+        $this->form_validation->set_rules('cartao_credito', 'Cartão de Crédito', 'required|numeric');
         
         if ($this->form_validation->run() == TRUE){
         	$this->usuario_model->update();
             $this->session->set_flashdata('success', 'Dados salvos com sucesso!');
+            redirect('painel/usuarios/editar/' . $this->input->post('id'),'refresh');
         }else{
             $this->session->set_flashdata('errors', validation_errors());
 
         }
 
-        redirect('painel/usuarios/editar/' . $this->input->post('id'),'refresh');
+        // redirect('painel/usuarios/editar/' . $this->input->post('id'),'refresh');
+        // $this->user_edit($this->input->post('id'));
+        $this->load->view('templates/panel_template/header');
+		$this->load->view('painel/user_edit', $this->input->post());
+		$this->load->view('templates/panel_template/footer');
 
 
 	}
@@ -241,18 +266,25 @@ class Painel_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_user_email_check',
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo)')
+        );
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[8]|callback_user_email_check',
         	array(
-        		'user_email_check' => 'Email já cadastrado'
+        		'email_check' => "Email já cadastrado"
         		)
         );
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_user_cpf_check',
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf|callback_user_cpf_check',
         	array(
-        		'user_cpf_check' => 'CPF já cadastrado'
+        		'user_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
         		)
         );
-        $this->form_validation->set_rules('senha', 'Senha', 'required');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[6]');
+        $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[10]');
+        $this->form_validation->set_rules('cartao_credito', 'Cartão de Crédito', 'required|numeric');
         
         if ($this->form_validation->run() == TRUE){
         	$this->usuario_model->insert();
@@ -269,6 +301,21 @@ class Painel_controller extends CI_Controller {
 
 		return $this->usuario_model->email_check($email);		
 	}
+
+	public function valida_cpf($cpf){
+		$this->load->helper('tools');
+
+		return validaCPF($cpf);
+
+	}
+
+	public function valida_nome($nome){
+		$this->load->helper('tools');
+
+		return validaNome($nome);
+
+	}
+
 
 	public function user_cpf_check($cpf){
 		$this->load->model('usuario_model');

@@ -25,20 +25,34 @@
                                 <?php echo form_open('painel_controller/user_add_post'); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Nome</label>
+                                            <label>Nome Completo</label>
                                             <input class="form-control" name="nome" id="nome" value="<?php echo isset($nome)? $nome : '' ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
+                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>Endereço</label>
+                                            <input class="form-control" name="endereco" id="endereco" value="<?php echo isset($endereco)? $endereco : '' ?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>CEP</label>
+                                            <input class="form-control formataCEP" name="cep" id="cep" maxlength="10" value="<?php echo isset($cep)? $cep : '' ?>">
+                                        </div>
                                         
                                         
                                     </div>
                                 
                                     <div class="col-lg-6">
+
+                                        <div class="form-group">
+                                            <label>Cartão de Crédito</label>
+                                            <input class="form-control" name="cartao_credito" id="cpf" value="<?php echo isset($cartao_credito)? $cartao_credito : '' ?>">
+                                        </div>
                                         
                                         <div class="form-group">
                                             <label>Email</label>

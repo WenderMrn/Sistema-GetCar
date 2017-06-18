@@ -64,19 +64,24 @@ class Usuario_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check',
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo)')
+        );
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|min_length[8]|callback_email_check',
         	array(
         		'email_check' => "Email já cadastrado"
         		)
         );
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|callback_cpf_check',
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf|callback_user_cpf_check',
         	array(
-        		'cpf_check' => "CPF já cadastrado"
+        		'user_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
         		)
         );
-        $this->form_validation->set_rules('senha', 'Senha', 'required');
+        $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[6]');
         $this->form_validation->set_rules('endereco', 'Endereço', 'required');
+        $this->form_validation->set_rules('cep', 'CEP', 'required|exact_length[10]');
         $this->form_validation->set_rules('cartao_credito', 'Cartão de Crédito', 'required|numeric');
         
         if ($this->form_validation->run() == TRUE){
@@ -90,6 +95,20 @@ class Usuario_controller extends CI_Controller {
 		$this->load->model('usuario_model');
 
 		return $this->usuario_model->email_check($email);		
+	}
+
+	public function valida_cpf($cpf){
+		$this->load->helper('tools');
+
+		return validaCPF($cpf);
+
+	}
+
+	public function valida_nome($nome){
+		$this->load->helper('tools');
+
+		return validaNome($nome);
+
 	}
 
 	public function cpf_check($cpf){
