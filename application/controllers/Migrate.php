@@ -70,6 +70,75 @@ class Migrate extends CI_Controller
                 {
                     show_error($this->migration->error_string());
                 }else{
+
+                    $this->db->truncate('usuario');
+                    // $this->db->truncate('usuario');
+                    
+                    $admin_data = array(
+                        'nome' => 'Usuario Um',
+                        'email' => 'user1@user.com',
+                        'cpf' => '472.787.960-32',
+                        'cep' => '58000-000',
+                        'cartao_credito' => '4444444444444444',
+                        'endereco' => 'Rua fulano de tal 44, Bairro Cicrano, Cidade Filomena, PB',
+                        'aprovado' => 0,
+                        'senha' => md5('123456')
+                    );
+
+                    $this->db->insert('usuario', $admin_data);
+
+                    $admin_data = array(
+                        'nome' => 'Usuario Dois',
+                        'email' => 'user2@user.com',
+                        'cpf' => '028.895.360-68',
+                        'cep' => '58000-000',
+                        'cartao_credito' => '4444444444444444',
+                        'endereco' => 'Rua fulano de tal 44, Bairro Cicrano, Cidade Filomena, PB',
+                        'aprovado' => 0,
+                        'senha' => md5('123456')
+                    );
+
+                    $this->db->insert('usuario', $admin_data);
+
+                    $admin_data = array(
+                        'nome' => 'User Tres',
+                        'email' => 'user3@user.com',
+                        'cpf' => '275.387.170-13',
+                        'cep' => '58000-000',
+                        'cartao_credito' => '4444444444444444',
+                        'endereco' => 'Rua fulano de tal 44, Bairro Cicrano, Cidade Filomena, PB',
+                        'aprovado' => 0,
+                        'senha' => md5('123456')
+                    );
+
+                    $this->db->insert('usuario', $admin_data);
+
+                    $admin_data = array(
+                        'nome' => 'User Quatro',
+                        'email' => 'user4@user.com',
+                        'cpf' => '254.464.300-50',
+                        'cep' => '58000-000',
+                        'cartao_credito' => '4444444444444444',
+                        'endereco' => 'Rua fulano de tal 44, Bairro Cicrano, Cidade Filomena, PB',
+                        'aprovado' => 0,
+                        'senha' => md5('123456')
+                    );
+
+                    $this->db->insert('usuario', $admin_data);
+
+                    $admin_data = array(
+                        'nome' => 'User Cinco',
+                        'email' => 'user5@user.com',
+                        'cpf' => '279.330.370-46',
+                        'cep' => '58000-000',
+                        'cartao_credito' => '4444444444444444',
+                        'endereco' => 'Rua fulano de tal 44, Bairro Cicrano, Cidade Filomena, PB',
+                        'aprovado' => 0,
+                        'senha' => md5('123456')
+                    );
+
+                    $this->db->insert('usuario', $admin_data);
+
                 	echo "<h3>Migração usuario concluida</h3>";
                 }
         }
