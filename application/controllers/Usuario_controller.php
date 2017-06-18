@@ -73,9 +73,9 @@ class Usuario_controller extends CI_Controller {
         		'email_check' => "Email já cadastrado"
         		)
         );
-        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf|callback_user_cpf_check',
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[11]|callback_valida_cpf|callback_cpf_check',
         	array(
-        		'user_cpf_check' => 'CPF já cadastrado',
+        		'cpf_check' => 'CPF já cadastrado',
         		'valida_cpf' => 'CPF Inválido'
         		)
         );
