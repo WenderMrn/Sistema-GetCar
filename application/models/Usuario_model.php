@@ -24,7 +24,20 @@ class Usuario_model extends CI_Model {
 
         public function getById($id)
         {
-            $query = $this->db->get_where('usuario', array('id' => $id));
+            $query = $this->db->get_where('usuario', array('id' => $id)); 
+            return $query->result_array();
+        }
+
+        public function searchByNameOrCpf($search = 'Usu')
+        {
+            $query = $this->db->select('*')
+                ->like('nome', $search)
+                ->or_like('cpf', $search)
+                // ->or_where('cpf', $search)
+                ->get($this->table_name);
+            // $query = $this->db->get_where('usuario', array('nome' => $search))->or_where('cpf', $search);
+
+            // var_dump($query->result_array()); exit;
             return $query->result_array();
         }
 

@@ -385,9 +385,18 @@ class Painel_controller extends CI_Controller {
             $this->session->set_flashdata('success', 'Usuário deletado com sucesso!');
         }
         redirect('painel/usuarios/','refresh');
-        
+	}
 
+	public function search_users_json(){
+		$this->load->model('usuario_model');
 
+		$search = $this->input->post('search');
+
+		$result = $this->usuario_model->searchByNameOrCpf($search);
+		$this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($result));
+		
 	}
 
 	
