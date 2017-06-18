@@ -33,24 +33,17 @@
                                             <th>#</th>
                                             <th>Nome</th>
                                             <th>Email</th>
-                                            <th>Ações</th>
+                                            <th>CPF</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($administradores as $row): ?>
                                             <tr>
                                                 <td><?php echo $row['id']; ?></td>
-                                                <td><?php echo $row['nome']; ?></td>
+                                                
+                                                <td><?php echo anchor('painel/administradores/' . $row['id'], $row['nome']); ?></td>
                                                 <td><?php echo $row['email']; ?></td>
-                                                <td>
-                                                    <?php echo anchor('painel/administradores/editar/' . $row['id'], 'Editar', array('class' => 'btn btn-primary')); ?>
-                                                    <?php   
-                                                        //codigo para tratar se o admin é o atual logado
-                                                        if($this->session->userdata('id') != $row['id']): 
-                                                    ?>
-                                                        <?php echo anchor('painel/administradores/deletar/' . $row['id'], 'Deletar', array('class' => 'btn btn-danger')); ?>
-                                                    <?php endif; ?>
-                                                </td>
+                                                <td><?php echo $row['cpf']; ?></td>
                                                 
                                             </tr>
 

@@ -64,6 +64,7 @@ $route['cadastrar'] = 'home_controller/cadastrar';
 
 //CRUD ADMINISTRADOR
 $route['painel/administradores'] = 'painel_controller/admin_list';
+$route['painel/administradores/:num'] = 'painel_controller/admin_show';
 $route['painel/administradores/editar/:num'] = 'painel_controller/admin_edit';
 $route['painel/admin_edit_post'] = 'painel_controller/admin_edit_post';
 $route['painel/administradores/adicionar'] = 'painel_controller/admin_add';

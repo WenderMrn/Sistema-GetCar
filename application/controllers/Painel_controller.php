@@ -24,6 +24,25 @@ class Painel_controller extends CI_Controller {
 		$this->load->view('templates/panel_template/footer');
 	}
 
+	public function admin_show(){
+		$this->load->model('administrador_model');
+		
+		$id = $this->uri->segment(3);
+
+		$data = array();
+		$result = $this->administrador_model->getById($id);
+		
+		if(!empty($result)){
+			$data = $result[0];
+			
+			$this->load->view('templates/panel_template/header');
+			$this->load->view('painel/admin_show', $data);
+			$this->load->view('templates/panel_template/footer');
+		}else{
+			$this->admin_list();
+		}
+	}
+
 	public function admin_edit(){
 		$this->load->model('administrador_model');
 
