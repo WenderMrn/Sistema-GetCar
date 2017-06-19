@@ -139,7 +139,7 @@ class Usuario_model extends CI_Model {
                     $this->senha = $query->result_array()[0]['senha'];
             }
 
-            $this->db->update('usuario', $this);
+            $this->db->update('usuario', $this, array('id' => $this->input->post('id')));
         }
 
 }
