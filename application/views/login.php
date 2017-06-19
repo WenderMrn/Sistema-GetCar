@@ -11,6 +11,11 @@
                                 <?php echo $this->session->flashdata('error_login'); ?>
                             </div>
                         <?php endif; ?>
+                        <?php if($this->session->flashdata('alert_login')): ?>
+                            <div class="alert alert-warning"><i class="fa fa-info-circle" aria-hidden="true"></i> 
+                                <?php echo $this->session->flashdata('alert_login'); ?>
+                            </div>
+                        <?php endif; ?>
                         <?php echo form_open('autenticacao_controller/validar_login'); ?>
                             <fieldset>
                                 <div class="form-group">

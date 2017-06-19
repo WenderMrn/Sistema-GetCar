@@ -4,6 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Painel_controller extends CI_Controller {
 
+	public function __construct()
+    {
+        parent::__construct();
+        if ( ! $this->session->userdata('admin'))
+        { 
+            redirect('admin');
+        }
+    }
+
 	public function index()
 	{
 		$this->load->view('templates/panel_template/header');
@@ -179,10 +188,11 @@ class Painel_controller extends CI_Controller {
             $this->session->set_flashdata('success', 'Administrador deletado com sucesso!');
         }
         redirect('painel/administradores/','refresh');
-        
-
 
 	}
+
+
+
 	//FIM ADMIN ACTIONS
 
 	//USER ACTIONS
@@ -191,6 +201,7 @@ class Painel_controller extends CI_Controller {
 
 		$data = array();
 		$data['usuarios'] = $this->usuario_model->getAll();
+		$data['usuarios_pendentes'] = $this->usuario_model->getPendingUsers();
 
 
 		$this->load->view('templates/panel_template/header');
@@ -385,6 +396,46 @@ class Painel_controller extends CI_Controller {
             $this->session->set_flashdata('success', 'Usuário deletado com sucesso!');
         }
         redirect('painel/usuarios/','refresh');
+	}
+
+	public function user_accept(){
+
+		$this->load->model('usuario_model');
+
+		$id = $this->uri->segment(4);
+
+		$data = array();
+		$result = $this->usuario_model->userAccept($id);
+		
+		if($result){
+			$this->session->set_flashdata('success', 'Usuário aprovado com sucesso');
+		}else{
+			$this->session->set_flashdata('errors', 'Erro ao aprovar usuário');
+		}
+		redirect('painel/usuarios');
+	
+	}
+
+	// STATUS APROVADO = 0 = PENDENTE
+	// STATUS APROVADO = 1 = APROVADO
+	// STATUS APROVADO = 2 = NEGADO
+
+	public function user_deny(){
+
+		$this->load->model('usuario_model');
+
+		$id = $this->uri->segment(4);
+
+		$data = array();
+		$result = $this->usuario_model->userDeny($id);
+		
+		if($result){
+			$this->session->set_flashdata('success', 'Usuário negado com sucesso');
+		}else{
+			$this->session->set_flashdata('errors', 'Erro ao negar usuário');
+		}
+		redirect('painel/usuarios');
+	
 	}
 
 	public function search_users_json(){

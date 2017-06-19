@@ -22,6 +22,12 @@ class Usuario_model extends CI_Model {
             return $query->result_array();
         }
 
+        public function getPendingUsers()
+        {
+            $query = $this->db->get_where('usuario', array('aprovado' => 0));
+            return $query->result_array();
+        }
+
         public function getById($id)
         {
             $query = $this->db->get_where('usuario', array('id' => $id)); 
@@ -96,7 +102,7 @@ class Usuario_model extends CI_Model {
             $this->senha  = md5($_POST['senha']);
 
             // $result = $this->db->get_where(array('email' => $this->email, 'senha' => $this->senha));
-            $result = $this->db->select(array('id', 'nome', 'email'))
+            $result = $this->db->select(array('id', 'nome', 'email', 'aprovado'))
                     ->where(array('email' => $this->email, 'senha' => $this->senha))
                     ->get('usuario');
             
@@ -106,6 +112,14 @@ class Usuario_model extends CI_Model {
             
             return false;
 
+        }
+
+        public function userAccept($id){
+            return $this->db->update('usuario', array('aprovado' => 1), array('id' => $id));
+        }
+
+        public function userDeny($id){
+            return $this->db->update('usuario', array('aprovado' => 2), array('id' => $id));
         }
 
         public function update()
