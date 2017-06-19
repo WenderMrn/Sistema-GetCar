@@ -59,7 +59,7 @@ class Avaliacao_model extends CI_Model {
             $this->comentario       = $this->input->post('comentario');
             $this->usuario_id       = $this->input->post('usuario_id');
 
-            $this->db->update($this->table_name, $this);
+            $this->db->update($this->table_name, $this, array('id' => $this->input->post('id')));
         }
 
 }
