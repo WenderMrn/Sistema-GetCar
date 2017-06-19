@@ -22,7 +22,7 @@ class Migrate extends CI_Controller
                         'nome' => 'Administrador',
                         'email' => 'admin@admin.com',
                         'cpf' => '000.000.000-00',
-                        'senha' => md5('123')
+                        'senha' => md5('123456')
                 	);
 
                 	$this->db->insert('administrador', $admin_data);
@@ -31,7 +31,7 @@ class Migrate extends CI_Controller
                         'nome' => 'Rafael Cruz',
                         'email' => 'rafael@admin.com',
                         'cpf' => '111.111.111-11',
-                        'senha' => md5('123')
+                        'senha' => md5('123456')
                     );
 
                     $this->db->insert('administrador', $admin_data);
@@ -40,7 +40,7 @@ class Migrate extends CI_Controller
                         'nome' => 'Wender',
                         'email' => 'wender@admin.com',
                         'cpf' => '222.222.222-22',
-                        'senha' => md5('123')
+                        'senha' => md5('123456')
                     );
 
                     $this->db->insert('administrador', $admin_data);
@@ -49,7 +49,7 @@ class Migrate extends CI_Controller
                         'nome' => 'Vicente Correia',
                         'email' => 'vicente@admin.com',
                         'cpf' => '333.333.333-33',
-                        'senha' => md5('123')
+                        'senha' => md5('123456')
                     );
 
                     $this->db->insert('administrador', $admin_data);
@@ -58,7 +58,7 @@ class Migrate extends CI_Controller
                         'nome' => 'Lucas Schulze',
                         'email' => 'lucas@admin.com',
                         'cpf' => '444.444.444-44',
-                        'senha' => md5('123')
+                        'senha' => md5('123456')
                     );
 
                     $this->db->insert('administrador', $admin_data);
