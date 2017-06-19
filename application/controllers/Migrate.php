@@ -141,6 +141,58 @@ class Migrate extends CI_Controller
 
                 	echo "<h3>Migração usuario concluida</h3>";
                 }
+
+
+                if ($this->migration->version(3) === FALSE)
+                {
+                    show_error($this->migration->error_string());
+                }else{
+
+                    $this->db->truncate('avaliacao');
+                    // $this->db->truncate('usuario');
+                    
+                    $admin_data = array(
+                        'satisfacao' => 5,
+                        'comentario' => 'Esse sistema é demais! Estou alugando 5 carros por dia! Eu poderia comprar um? Podia, mas esse sistema é tão bom que vou continuar alugando enquanto estiver vivo!',
+                        'usuario_id' => 1 
+                    );
+
+                    $this->db->insert('avaliacao', $admin_data);
+                    
+                    $admin_data = array(
+                        'satisfacao' => 2,
+                        'comentario' => 'Odiei, pq não tenho dinheiro para alugar esses carros lindos!',
+                        'usuario_id' => 2 
+                    );
+
+                    $this->db->insert('avaliacao', $admin_data);
+                    
+                    $admin_data = array(
+                        'satisfacao' => 5,
+                        'comentario' => 'Massa geral!',
+                        'usuario_id' => 3 
+                    );
+
+                    $this->db->insert('avaliacao', $admin_data);
+                    
+                    $admin_data = array(
+                        'satisfacao' => 3,
+                        'comentario' => 'Adorei! Sistema SHOW! Voltarei mais vezes, com certeza! Mas dei 3 estrelas pq eu quis.',
+                        'usuario_id' => 4 
+                    );
+                    $this->db->insert('avaliacao', $admin_data);
+
+                    $admin_data = array(
+                        'satisfacao' => 5,
+                        'comentario' => 'AAAAMEEEEEEEIIIIIIIIIIIIIIII!',
+                        'usuario_id' => 5 
+                    );
+                    $this->db->insert('avaliacao', $admin_data);
+
+                    
+
+                    echo "<h3>Migração avaliacao concluida</h3>";
+                }
         }
 
 }

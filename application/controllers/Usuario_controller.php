@@ -15,9 +15,9 @@ class Usuario_controller extends CI_Controller {
 	//USER ACTIONS (incompleto)
 
 	public function index(){
-		$this->load->view('templates/panel_template/header');
-		$this->load->view('user/index');
-		$this->load->view('templates/panel_template/footer');
+		$this->load->view('templates/shop_template/header');
+		$this->load->view('shop/index');
+		$this->load->view('templates/shop_template/footer');
 	}
 	
 	public function user_list(){
