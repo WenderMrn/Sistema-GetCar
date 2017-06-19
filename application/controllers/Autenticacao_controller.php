@@ -31,14 +31,14 @@ class Autenticacao_controller extends CI_Controller {
         
 		$result['user'] = $this->usuario_model->validate();
 		
-		if($result){
+		if($result['user']){
 
 			if($result['user']['aprovado'] == 0){
 				$this->session->set_flashdata('alert_login', 'Seu cadastro ainda está pendente. Aguarde um momento e tente novamente.');
-				redirect('login');
+				redirect('login', 'refresh');
 			}elseif($result['user']['aprovado'] == 2){
 				$this->session->set_flashdata('error_login', 'Infelizmente seu cadastro foi negado. Por favor, contacte-nos para maiores informações.');
-				redirect('login');
+				redirect('login', 'refresh');
 			}else{
 				$this->session->set_userdata($result);
 				redirect('usuario_controller','refresh');
@@ -46,7 +46,7 @@ class Autenticacao_controller extends CI_Controller {
 		}else{
 			// $this->form_validation->set_message('invalid_pass_or_email', 'Email ou senha inválidos.');
 			$this->session->set_flashdata('error_login', 'Email ou senha inválidos.');
-			redirect('login');
+			redirect('login', 'refresh');
 		}
         
 	}
@@ -56,14 +56,15 @@ class Autenticacao_controller extends CI_Controller {
 		$this->load->model('administrador_model');
         
 		$result['admin'] = $this->administrador_model->validate();
+			
 		
-		if($result){
+		if($result['admin']){
 			$this->session->set_userdata($result);
 			redirect('painel_controller','refresh');
 		}else{
 			// $this->form_validation->set_message('invalid_pass_or_email', 'Email ou senha inválidos.');
 			$this->session->set_flashdata('error_login', 'Email ou senha inválidos.');
-			redirect('admin','refresh');
+			redirect('autenticacao_controller/admin_login', 'refresh');
 		}
         
 	}
