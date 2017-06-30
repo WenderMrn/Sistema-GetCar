@@ -25,4 +25,31 @@ class Avaliacao_controller extends CI_Controller {
 
 		return $this->avaliacao_model->getAll();
 	}
+
+    public function register_avaliacao(){
+        if($this->addAvaliacao()){
+            $this->session->set_flashdata('success_avaliacao', 'Agradecemos sua avaliação!');
+            redirect('shop/avaliacao','refresh');
+        }
+        $this->load->view('templates/shop_template/header');
+        $this->load->view('shop/avaliacao', $this->input->post());
+        $this->load->view('templates/shop_template/footer');
+       
+    }
+	public function addAvaliacao(){
+		
+		$this->load->model('avaliacao_model');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('comentario', 'Comentário', 'required','');
+
+         $this->form_validation->set_rules('satisfacao', 'Satisfação', 'required','');
+
+        if ($this->form_validation->run() == TRUE){
+            $this->avaliacao_model->insert();
+            return true;
+        }
+        return false;
+        }
+
 }

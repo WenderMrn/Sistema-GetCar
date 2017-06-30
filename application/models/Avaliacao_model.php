@@ -34,8 +34,7 @@ class Avaliacao_model extends CI_Model {
         {
             $this->satisfacao       = $this->input->post('satisfacao');
             $this->comentario       = $this->input->post('comentario');
-            $this->usuario_id       = $this->input->post('usuario_id');
-
+            $this->usuario_id       = $this->session->user['id'];
             $this->db->insert($this->table_name, $this);
         }
 

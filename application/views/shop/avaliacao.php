@@ -1,6 +1,5 @@
 <?php $this->view('templates/shop_template/navigation'); ?>
 
-
 <div class="container">
 
         <div class="row">
@@ -14,16 +13,47 @@
                 </div>
             </div>
             <div class="col-md-9">
-            	<h1>Sua avaliação é muito inportante porque nos ajuda a melhorar nosso serviço</h1>
+            	<h2>Avaliação do sistema</h2>
+            	<h4>Sua avaliação é muito inportante porque nos ajuda a melhorar nosso serviço</h4>
+                 <?php if($this->session->flashdata('success_avaliacao')): ?>
+                 <div class="alert alert-success"> 
+                    <?php echo $this->session->flashdata('success_avaliacao'); ?>
+                </div>
+                <?php endif; ?>
+                <?php if(validation_errors()): ?>
+                <div class="alert alert-danger"> 
+                    <?php echo validation_errors(); ?>
+                </div>
+                <?php endif; ?>
+
             	<div class="well">
-            		<form action="">
+            		<?php echo form_open('avaliacao_controller/register_avaliacao'); ?>
             			<div class="form-group">
-            			<select name="" id="" >
-            				<option value="1">www</option>
-            				<option value="1">www</option>
-            			</select>
-            			</div>
-            		</form>
+                            <label>Nível de satisfação</label>
+                            <select name="satisfacao" id="satisfacao"  class="form-control">
+                                <option value="">Escolha uma opção</option>
+                                <option value="1">1</option>
+                                 <option value="2">2</option>
+                                 <option value="3">3</option>
+                                 <option value="4">4</option>
+                                 <option value="5">5</option>
+                            </select><br>
+                            <label>Comentário</label>
+                            <textarea class="form-control" name="comentario" id="comentario" ></textarea>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-1"><div class="form-group">
+                            <?php echo form_submit('btn_add_avaliacao', 'Salvar', array('class' => 'btn btn-success')); ?>  
+                        </div></div>
+                        <div class="col-md-1"><div class="form-group">
+                        <?php echo anchor('usuario_controller', 'Voltar', array('class' => 'btn btn-primary')); ?>
+                        </div></div>
+                        </div>
+                        
+                        
+                    <?php echo form_close(); ?>
+            		
             	</div>
             </div>
         </div>
