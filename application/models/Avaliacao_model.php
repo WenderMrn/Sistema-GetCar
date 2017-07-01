@@ -61,5 +61,12 @@ class Avaliacao_model extends CI_Model {
             $this->db->update($this->table_name, $this, array('id' => $this->input->post('id')));
         }
 
+        public function verificar_avaliacao($userid){
+         
+        $query = $this->db->get_where($this->table_name, array('usuario_id' => $userid));
+        $result = $query->result_array();
+        return $result; 
+    }
+
 }
 

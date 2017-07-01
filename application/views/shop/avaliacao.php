@@ -1,4 +1,3 @@
-
 <?php $this->view('templates/shop_template/navigation'); ?>
 <div class="container">
 
@@ -27,16 +26,10 @@
                 <?php endif; ?>
 
             	<div class="well">
-                    <?php if ($status_avaliacao['status'] == 1) {?>
-                        
-                        <h4>Você já avaliou nosso aplicativo</h4>
-                        <p><strong>Nota: </strong><?php echo $status_avaliacao['nota']; ?></p>
-                        <p><strong>Comentário: </strong><?php echo $status_avaliacao['comentario']; ?></p>
+                    <?php if ($status_avaliacao == null) {?>
 
-                    <?php }else{ ?>
-                    
-            		<?php echo form_open('avaliacao_controller/register_avaliacao'); ?>
-            			<div class="form-group">
+                    <?php echo form_open('avaliacao_controller/register_avaliacao'); ?>
+                        <div class="form-group">
                             <label>Nível de satisfação</label>
                             <select name="satisfacao" id="satisfacao"  class="form-control">
                                 <option value="">Escolha uma opção</option>
@@ -58,9 +51,14 @@
                         <?php echo anchor('usuario_controller', 'Voltar', array('class' => 'btn btn-primary')); ?>
                         </div></div>
                         </div>
-                        
-                        
+            
                     <?php echo form_close(); ?>
+
+                    <?php }else{ ?>
+                        <h4>Você já avaliou nosso aplicativo</h4>
+                        <p><strong>Nota: <?php echo $status_avaliacao['0']['satisfacao']; ?> </strong></p>
+                        <p><strong>Comentário: <?php echo $status_avaliacao['0']['comentario']; ?> </strong></p>
+            		
                     <?php } ?>
             		
             	</div>

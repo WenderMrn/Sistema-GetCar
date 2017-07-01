@@ -15,33 +15,18 @@ class Avaliacao_controller extends CI_Controller {
 
     //AVALIAÇÕES ACTIONS (incompleto)
     public function index(){
+        $user = $this->session->userdata('user');
+        $this->load->model('avaliacao_model');
+
         $data = array();
-        $data['status_avaliacao'] = $this->verificar_avaliacao();
+        $avaliacoes = $this->avaliacao_model->verificar_avaliacao($user['id']);
+        $data['status_avaliacao'] = $avaliacoes;
         $this->load->view('templates/shop_template/header');
 		$this->load->view('shop/avaliacao', $data);
 		$this->load->view('templates/shop_template/footer');
-        
-  
 	}
 
-    public function verificar_avaliacao(){
-       $this->load->model('avaliacao_model');
-
-        $avaliacoes = $this->avaliacao_model->getAll();
-        $user = $this->session->userdata('user');
-        $dadosAvaliacao = array();
-
-         foreach ($avaliacoes as $avaliacao) {
-              if ($user['id'] == $avaliacao['usuario_id']) {
-                $dadosAvaliacao['status'] = 1;
-                $dadosAvaliacao['nota'] = $avaliacao['satisfacao'];
-                $dadosAvaliacao['comentario'] = $avaliacao['comentario'];
-              } else{
-                $dadosAvaliacao['status'] = 0;
-              } 
-          }
-        return $dadosAvaliacao; 
-    }
+   
 
 	public function avaliacao_list(){
 		$this->load->model('avaliacao_model');
