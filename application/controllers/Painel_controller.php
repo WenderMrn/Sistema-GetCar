@@ -195,6 +195,21 @@ class Painel_controller extends CI_Controller {
 
 	//FIM ADMIN ACTIONS
 
+	//AVALIACAO ACTIONS
+	public function avaliacao_list(){
+		$this->load->model('avaliacao_model');
+		$this->load->model('usuario_model');
+
+
+		$data = array();
+		$data['avaliacoes'] = $this->avaliacao_model->getAll();
+		$data['usuarios'] = $this->usuario_model->getAll();
+
+		$this->load->view('templates/panel_template/header');
+		$this->load->view('painel/avaliacao_list', $data);
+		$this->load->view('templates/panel_template/footer');
+	}
+
 	//USER ACTIONS
 	public function user_list(){
 		$this->load->model('usuario_model');

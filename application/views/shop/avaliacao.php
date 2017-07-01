@@ -1,5 +1,5 @@
-<?php $this->view('templates/shop_template/navigation'); ?>
 
+<?php $this->view('templates/shop_template/navigation'); ?>
 <div class="container">
 
         <div class="row">
@@ -27,6 +27,14 @@
                 <?php endif; ?>
 
             	<div class="well">
+                    <?php if ($status_avaliacao['status'] == 1) {?>
+                        
+                        <h4>Você já avaliou nosso aplicativo</h4>
+                        <p><strong>Nota: </strong><?php echo $status_avaliacao['nota']; ?></p>
+                        <p><strong>Comentário: </strong><?php echo $status_avaliacao['comentario']; ?></p>
+
+                    <?php }else{ ?>
+                    
             		<?php echo form_open('avaliacao_controller/register_avaliacao'); ?>
             			<div class="form-group">
                             <label>Nível de satisfação</label>
@@ -53,6 +61,7 @@
                         
                         
                     <?php echo form_close(); ?>
+                    <?php } ?>
             		
             	</div>
             </div>

@@ -15,10 +15,33 @@ class Avaliacao_controller extends CI_Controller {
 
     //AVALIAÇÕES ACTIONS (incompleto)
     public function index(){
-    	$this->load->view('templates/shop_template/header');
-		$this->load->view('shop/avaliacao');
+        $data = array();
+        $data['status_avaliacao'] = $this->verificar_avaliacao();
+        $this->load->view('templates/shop_template/header');
+		$this->load->view('shop/avaliacao', $data);
 		$this->load->view('templates/shop_template/footer');
+        
+  
 	}
+
+    public function verificar_avaliacao(){
+       $this->load->model('avaliacao_model');
+
+        $avaliacoes = $this->avaliacao_model->getAll();
+        $user = $this->session->userdata('user');
+        $dadosAvaliacao = array();
+
+         foreach ($avaliacoes as $avaliacao) {
+              if ($user['id'] == $avaliacao['usuario_id']) {
+                $dadosAvaliacao['status'] = 1;
+                $dadosAvaliacao['nota'] = $avaliacao['satisfacao'];
+                $dadosAvaliacao['comentario'] = $avaliacao['comentario'];
+              } else{
+                $dadosAvaliacao['status'] = 0;
+              } 
+          }
+        return $dadosAvaliacao; 
+    }
 
 	public function avaliacao_list(){
 		$this->load->model('avaliacao_model');
@@ -44,6 +67,8 @@ class Avaliacao_controller extends CI_Controller {
         $this->form_validation->set_rules('comentario', 'Comentário', 'required','');
 
          $this->form_validation->set_rules('satisfacao', 'Satisfação', 'required','');
+
+         $avaliacoes = $this->avaliacao_model->getAll();
 
         if ($this->form_validation->run() == TRUE){
             $this->avaliacao_model->insert();

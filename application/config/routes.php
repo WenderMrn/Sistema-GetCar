@@ -72,6 +72,8 @@ $route['painel/admin_add_post'] = 'painel_controller/admin_add_post';
 $route['painel/administradores/deletar/:num'] = 'painel_controller/admin_delete';
 $route['painel/admin_delete_post'] = 'painel_controller/admin_delete_post';
 $route['painel/usuarios/pesquisar'] = 'painel_controller/search_users_json';
+$route['painel/avaliacoes'] = 'painel_controller/avaliacao_list';
+
 
 
 //CRUD USUÁRIO

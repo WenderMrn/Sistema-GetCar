@@ -236,7 +236,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="index.html"> Dashboard</a>
                         </li>
                         <!-- <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -328,6 +328,10 @@
                         <li>
                             
                             <?php echo anchor('painel/administradores', '<i class="fa fa-user-circle-o fa-fw"></i> Administradores</span>'); ?>
+                        </li>
+                        <li>
+                            
+                            <?php echo anchor('painel/avaliacoes', '<i class="fa fa-dashboard fa-fw"></i> Avaliações</span>'); ?>
                         </li>
                     </ul>
                 </div>
