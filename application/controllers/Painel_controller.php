@@ -210,6 +210,36 @@ class Painel_controller extends CI_Controller {
 		$this->load->view('templates/panel_template/footer');
 	}
 
+	public function avaliacao_show(){
+		$this->load->model('avaliacao_model');
+		$this->load->model('usuario_model');
+
+		
+		
+		$id = $this->uri->segment(3);
+
+		$data = array();
+		$result = $this->avaliacao_model->getById($id);
+		$data['usuarios'] = $this->usuario_model->getAll();
+		if(!empty($result)){
+			$data['result'] = $result[0];
+			$this->load->view('templates/panel_template/header');
+			$this->load->view('painel/avaliacao_show', $data);
+			$this->load->view('templates/panel_template/footer');
+		}else{
+			$this->avaliacao_list();
+		}
+	}
+
+	public function avaliacao_delete_post(){
+		$this->load->model('avaliacao_model');
+
+        if ($this->avaliacao_model->delete()){
+            $this->session->set_flashdata('success', 'Avaliacao deletada com sucesso!');
+        }
+        redirect('painel/avaliacoes','refresh');
+	}
+
 	//USER ACTIONS
 	public function user_list(){
 		$this->load->model('usuario_model');

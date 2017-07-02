@@ -155,3 +155,13 @@ $(".formataCPF").keypress(function(event) {
 $(".formataCEP").keypress(function(event) {
     MascaraCep(this);
 });
+
+
+//modal para deletar avaliação
+$('#deleteAvaliacao').on('show.bs.modal', function (event) {
+    console.log('foi');
+  var button = $(event.relatedTarget);
+  var id = button.data('id-avaliacao'); 
+  var modal = $(this);
+  modal.find('.modal-body input').val(id);
+})

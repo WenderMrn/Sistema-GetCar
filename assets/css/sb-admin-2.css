@@ -432,3 +432,11 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+/*plus style*/
+.avaliacao-star{
+  color: #edd103;
+}
+.img-av-sistema{
+  margin-top: 10px;
+  max-width: 55px;
+}

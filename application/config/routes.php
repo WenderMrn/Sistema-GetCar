@@ -90,6 +90,9 @@ $route['painel/user_delete_post'] = 'painel_controller/user_delete_post';
 
 //CRUD AVALIAÇÃO
 $route['shop/avaliacao'] = 'avaliacao_controller';
+$route['painel/avaliacao/:num'] = 'painel_controller/avaliacao_show';
+$route['painel/avaliacao_delete_post'] = 'painel_controller/avaliacao_delete_post';
+
 
 //MIGRATION
 $route['install'] = 'migrate/index';

@@ -13,67 +13,161 @@
                 <?php if($this->session->flashdata('success')): ?>
                     <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
                 <?php endif; ?>
+                <?php if($this->session->flashdata('errors')): ?>
+                    <div class="alert alert-success"><?php echo $this->session->flashdata('errors'); ?></div>
+                <?php endif; ?>
+            </div>
+
+            <div class="row">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item active">
+                    <a class="nav-link" data-toggle="tab" href="#av_sistema" role="tab">Sistema</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#av_veiculo" role="tab">Veículo</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  <div class="tab-pane active" id="av_sistema" role="tabpanel">
+                      <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-lg-8">Lista de todas as avaliações do sistema</div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+
+                                    <div class="row ">
+
+                                        
+
+                                        <?php foreach ($avaliacoes as $row): ?>
+                                        <div class="col-sm-6 col-md-4">
+                                            <div class="thumbnail">
+                                              
+                                              <div class="caption">
+                                                <h4>
+                                                    <?php 
+                                                        foreach ($usuarios as $usuario) {
+                                                            if( $usuario['id'] == $row['usuario_id']){
+                                                                echo $usuario['nome'];
+                                                                
+                                                            }
+                                                        }
+                                                    ?>
+                                                </h4>
+                                                <p class="avaliacao-star">
+                                                    <?php 
+                                                    $satisfacao =  $row['satisfacao'];
+                                                    $resto = 5 - $satisfacao;
+                                                    for ($i=0; $i < $satisfacao; $i++) { 
+                                                        echo "<i class=\"glyphicon glyphicon-star\"></i>";
+                                                    }
+
+                                                    for ($i=0; $i < $resto; $i++) { 
+                                                        echo "<i class=\"glyphicon glyphicon-star-empty\"></i>";
+                                                    }
+                                                    ?>
+                                                </p>
+                                                <p><?php echo $row['comentario']; ?></p>
+                                                <p><?php echo anchor('painel/avaliacao/' . $row['id'], 'Visualizar', array('class' => 'btn btn-primary')); ?>
+                                                    <?php echo anchor('#', 'Deletar', 
+                                                        array(
+                                                        'class' => 'btn btn-danger',
+                                                        'data-id-avaliacao' =>  $row['id'],
+                                                        'data-toggle' => 'modal',
+                                                        'data-target' => '#deleteAvaliacao')); ?>
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        <?php endforeach; ?>
+                                         
+                                    </div>
+                                  
+                                    
+                                    
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-6 -->
+                        
+                        <!-- /.col-lg-6 -->
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                  <div class="tab-pane" id="av_veiculo" role="tabpanel">
+                      <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-lg-8">Lista de todas as avaliações dos carros</div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="row" style="margin: 5px;">
+                                        <div class="col-lg-6 col-lg-offset-6 text-right">
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-6 -->
+                        
+                        <!-- /.col-lg-6 -->
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                </div>
+
+                
+
             </div>
             
-            <!-- /.row -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Lista de todas as avaliações
-                        </div>
-                        
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                                
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Usuário</th>
-                                            <th>Nível de satisfação</th>
-                                            <th>Comentário</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($avaliacoes as $row): ?>
-                                            <tr>
-                                                <td><?php echo $row['id']; ?></td>
-                                                <td>
-                                                	<?php 
-                                                		foreach ($usuarios as $usuario) {
-                                                			if( $usuario['id'] == $row['usuario_id']){
-                                                				echo anchor('painel/usuarios/' . $usuario['id'], $usuario['nome']);
-                                                				
-                                                			}
-                                                		}
-                                                	?>
-                                                </td>
-                                                <td><?php echo $row['satisfacao']; ?></td>
-                                                <td><?php echo $row['comentario']; ?></td>
-                                                
-                                            </tr>
-
-                                        <?php endforeach; ?>
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
-                
-                <!-- /.col-lg-6 -->
-            </div>
-            <!-- /.row -->
+            
             
         </div>
         <!-- /#page-wrapper -->
 
     </div>
     <!-- /#wrapper -->
+
+
+
+
+<div class="modal fade" id="deleteAvaliacao" tabindex="-1" role="dialog" aria-labelledby="deleteAvaliacaoLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Tem certeza que deseja excluir?</strong>
+      </div>
+      <div class="modal-body text-center">
+        <?php echo form_open('painel_controller/avaliacao_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => '')); ?>
+        <?php echo form_close(); ?>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success btn_to_action_form">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
