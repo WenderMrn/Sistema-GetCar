@@ -56,12 +56,13 @@
                                               <div class="caption">
                                                 <h4>
                                                     <?php 
+                                                        $user;
                                                         foreach ($usuarios as $usuario) {
                                                             if( $usuario['id'] == $row['usuario_id']){
-                                                                echo $usuario['nome'];
-                                                                
+                                                                $user = $usuario['nome'];
                                                             }
                                                         }
+                                                        echo $user;
                                                     ?>
                                                 </h4>
                                                 <p class="avaliacao-star">
@@ -83,6 +84,7 @@
                                                         array(
                                                         'class' => 'btn btn-danger',
                                                         'data-id-avaliacao' =>  $row['id'],
+                                                        'data-nome-user' =>  $user,
                                                         'data-toggle' => 'modal',
                                                         'data-target' => '#deleteAvaliacao')); ?>
                                                 </p>
@@ -160,13 +162,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Tem certeza que deseja excluir?</strong>
+        <strong class="modal-title"><i class="glyphicon glyphicon-trash"></i> Excluir</strong>
       </div>
       <div class="modal-body text-center">
         <?php echo form_open('painel_controller/avaliacao_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => '')); ?>
+            Tem certeza que deseja excluir a avaliação de <strong></strong> ?
         <?php echo form_close(); ?>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success btn_to_action_form">Excluir</button>
+        <hr>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-success btn_to_action_form">Sim</button>
       </div>
     </div>
   </div>

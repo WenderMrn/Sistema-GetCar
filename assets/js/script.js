@@ -162,6 +162,8 @@ $('#deleteAvaliacao').on('show.bs.modal', function (event) {
     console.log('foi');
   var button = $(event.relatedTarget);
   var id = button.data('id-avaliacao'); 
+  var nome = button.data('nome-user'); 
   var modal = $(this);
   modal.find('.modal-body input').val(id);
+  modal.find('.modal-body strong').text(nome);
 })
