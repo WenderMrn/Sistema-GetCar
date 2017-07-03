@@ -58,6 +58,7 @@ $route['login'] = 'autenticacao_controller/login';
 $route['logoff'] = 'autenticacao_controller/logoff';
 $route['admin'] = 'autenticacao_controller/admin_login';
 $route['admin/logoff'] = 'autenticacao_controller/admin_logoff';
+$route['user/logoff'] = 'autenticacao_controller/logoff';
 
 //CADASTRAR USUARIO
 $route['cadastrar'] = 'home_controller/cadastrar';
