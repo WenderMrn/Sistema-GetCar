@@ -193,6 +193,38 @@ class Migrate extends CI_Controller
 
                     echo "<h3>Migração avaliacao concluida</h3>";
                 }
+
+                if ($this->migration->version(4) === FALSE)
+                {
+                    show_error($this->migration->error_string());
+                }else{
+
+                    $this->db->truncate('ponto_locacao');
+                                       
+                    $ponto_locacao_data = array(
+                        'nome' => 'Ponto luxo',
+                        'endereco' => 'Rua das graças, número 3, Cristo' 
+                    );
+
+                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
+
+                    $ponto_locacao_data = array(
+                        'nome' => 'Ponto Certo',
+                        'endereco' => 'Rua do rio, número 36, centro' 
+                    );
+
+                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
+
+                    $ponto_locacao_data = array(
+                        'nome' => 'Ponto Esquina do beco',
+                        'endereco' => 'Avenida beira rio, número 56, Torre' 
+                    );
+
+                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
+                                                        
+
+                    echo "<h3>Migração ponto de locação concluida</h3>";
+                }
         }
 
 }
