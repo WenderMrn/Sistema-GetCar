@@ -96,6 +96,7 @@ $route['painel/avaliacao_delete_post'] = 'painel_controller/avaliacao_delete_pos
 
 //CRUD PONTO DE LOCAÇÃO
 $route['painel/pontos'] = 'ponto_controller/ponto_list';
+$route['painel/pontos/adicionar'] = 'ponto_controller/ponto_add';
 
 //MIGRATION
 $route['install'] = 'migrate/index';

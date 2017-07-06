@@ -4,6 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ponto_model extends CI_Model {
 
+    private $table_name = "ponto_locacao";
+
+
+        public $nome;
+        public $endereco;
+
     
 
     public function getAll($id)
@@ -17,6 +23,14 @@ class Ponto_model extends CI_Model {
                   ->get();
 
             return $query->result_array();
+        }
+
+    public function insert()
+        {
+            $this->nome    = $_POST['nome']; // please read the below note
+            $this->endereco  = $_POST['endereco'];
+
+            $this->db->insert('ponto_locacao', $this);
         }
 
 }

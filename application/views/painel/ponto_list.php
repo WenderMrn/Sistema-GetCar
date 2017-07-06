@@ -63,7 +63,7 @@
                             <!-- /.table-responsive -->
                             <div class="row">
                                     <div class="col-lg-12">
-                                        <?php echo anchor('painel/administradores/adicionar', 'Novo Administrador', array('class' => 'btn btn-primary')); ?>
+                                        <?php echo anchor('painel/pontos/adicionar', 'Novo ponto de locação', array('class' => 'btn btn-primary')); ?>
                                     </div>
                                 </div>
                         </div>
