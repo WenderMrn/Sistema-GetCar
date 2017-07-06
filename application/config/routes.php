@@ -94,6 +94,8 @@ $route['shop/avaliacao'] = 'avaliacao_controller';
 $route['painel/avaliacao/:num'] = 'painel_controller/avaliacao_show';
 $route['painel/avaliacao_delete_post'] = 'painel_controller/avaliacao_delete_post';
 
+//CRUD PONTO DE LOCAÇÃO
+$route['painel/pontos'] = 'ponto_controller/ponto_list';
 
 //MIGRATION
 $route['install'] = 'migrate/index';

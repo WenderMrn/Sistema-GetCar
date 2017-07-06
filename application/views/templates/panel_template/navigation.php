@@ -333,6 +333,10 @@
                             
                             <?php echo anchor('painel/avaliacoes', '<i class="fa fa-dashboard fa-fw"></i> Avaliações</span>'); ?>
                         </li>
+                        <li>
+                            
+                            <?php echo anchor('painel/pontos', '<i class="fa fa-dashboard fa-fw"></i> Pontos de locação</span>'); ?>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

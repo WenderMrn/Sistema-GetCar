@@ -225,6 +225,24 @@ class Migrate extends CI_Controller
 
                     echo "<h3>Migração ponto de locação concluida</h3>";
                 }
+
+                if ($this->migration->version(5) === FALSE)
+                {
+                    show_error($this->migration->error_string());
+                }else{
+
+                    $this->db->truncate('ponto_to_adm');
+                                       
+                    $ponto_to_adm_data = array(
+                        'id_ponto' => 1,
+                        'id_adm' => 1
+                    );
+
+                    $this->db->insert('ponto_to_adm', $ponto_to_adm_data);
+                                                        
+
+                    echo "<h3>Migração ponto de locação com administrador concluida</h3>";
+                }
         }
 
 }
