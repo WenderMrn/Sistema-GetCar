@@ -12,7 +12,8 @@
 	},
 	"require": {
 		"php": ">=5.2.4",
-		"components/metismenu": "^2.7"
+		"components/metismenu": "^2.7",
+		"doctrine/orm": "^2.5"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
