@@ -67,15 +67,6 @@ class Usuario_model extends CI_Model {
             $this->db->insert($this->table_name, $this);
         }
 
-        public function creditar()
-        {
-            $data = array(
-            $this->saldo = $_POST['valor']
-            );
-            
-            $this->db->replace($table_name, $data);
-        }
-
         public function email_check($email){
             
             $query = $this->db->select('*')
@@ -150,6 +141,28 @@ class Usuario_model extends CI_Model {
             }
 
             $this->db->update('usuario', $this, array('id' => $this->input->post('id')));
+        }
+
+        public function creditar()
+        {
+            $id = $_POST['id'];
+            $valor = $_POST['valor'];
+            
+            $this->db->set('saldo', $valor);
+            $this->db->where('id', $id);
+            $this->db->update($table_name);
+        }
+
+
+        public function searchByCpf($search)
+        {
+            $query = $this->db->select('nome')
+                ->like('cpf', $search)
+                ->get($this->table_name);
+            // $query = $this->db->get_where('usuario', array('nome' => $search))->or_where('cpf', $search);
+
+            // var_dump($query->result_array()); exit;
+            return $query->result_array();
         }
 
 }

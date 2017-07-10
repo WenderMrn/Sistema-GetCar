@@ -75,8 +75,7 @@ $route['painel/admin_delete_post'] = 'painel_controller/admin_delete_post';
 $route['painel/usuarios/pesquisar'] = 'painel_controller/search_users_json';
 $route['painel/avaliacoes'] = 'painel_controller/avaliacao_list';
 $route['painel/credito'] = 'painel_controller/credito';
-
-
+$route['painel/get_user_to_credit'] = 'painel_controller/get_user_to_credit';
 
 //CRUD USUÁRIO
 $route['painel/usuarios'] = 'painel_controller/user_list';

@@ -503,6 +503,18 @@ class Painel_controller extends CI_Controller {
 	
 	}
 
+	public function get_user_to_credit(){
+
+		$this->load->model('usuario_model');
+
+		$search = $this->input->post('cpf');
+
+		$result = $this->usuario_model->searchByCpf($search);
+		$this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($result));
+	}
+
 	public function credito_add_post(){
 		$this->load->model('usuario_model');
 
@@ -517,6 +529,11 @@ class Painel_controller extends CI_Controller {
         		'valida_cpf' => 'CPF Inválido'
         		)
         );
+
+        $this->form_validation->set_rules('valor', 'Valor', 'trim|required|greater_than[10]',
+        	array('valida_valor' => 'Valor inválido. (Insira um valor maior que 10)')
+        );
+        
         $this->form_validation->set_rules('valor', 'Valor', 'required');
         
         if ($this->form_validation->run() == TRUE){

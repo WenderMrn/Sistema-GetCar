@@ -24,7 +24,7 @@
                             <div class="row">
                                 <?php echo form_open('painel_controller/credito_add_post'); ?>
                                     <div class="col-lg-6">
-
+                                    <input type="hidden" name="user_id" id="user_id" value="">
                                         <div class="form-group">
                                             <label>CPF</label>
                                             <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
@@ -71,3 +71,37 @@
         </div>
         <!-- /#page-wrapper -->
 </div>
+
+<script type="text/javascript">
+    window.onload = function(e){
+        
+        $("#cpf").keyup(function(evento) {
+           var cpf = $(this).val();
+           var user_id = $("#user_id").val();
+           var valor = $("#valor").val();
+
+           if(cpf.length == 14){
+               $.ajax({
+                    url: '<?php echo site_url("painel/get_user_to_credit"); ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {cpf: cpf},
+                })
+                .done(function(json) {
+                    if(json["user_id"]){
+                        $("#user_id").val(json["user_id"]);
+                        $("#nome").val(json["nome"]);
+                    }
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+           }
+        });
+        
+    }
+
+</script>
