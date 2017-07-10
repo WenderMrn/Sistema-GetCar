@@ -521,9 +521,7 @@ class Painel_controller extends CI_Controller {
 
 		$this->load->library('form_validation');
 
-        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
-        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo, sem numeros)')
-        );
+        
         $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[14]|callback_valida_cpf|callback_admin_cpf_check',
         	array(
         		'admin_cpf_check' => 'CPF já cadastrado',
@@ -531,11 +529,10 @@ class Painel_controller extends CI_Controller {
         		)
         );
 
-        $this->form_validation->set_rules('valor', 'Valor', 'trim|required|greater_than[10]',
-        	array('valida_valor' => 'Valor inválido. (Insira um valor maior que 10)')
+        $this->form_validation->set_rules('valor', 'Valor', 'is_natural_no_zero|required|greater_than[10]',
+        	array('greater_than' => 'Informe o valor maior que dez', 'is_natural_no_zero' => 'Informe apenas valores numéricos')
         );
         
-        $this->form_validation->set_rules('valor', 'Valor', 'required');
         
         if ($this->form_validation->run() == TRUE){
         	$this->usuario_model->creditar();

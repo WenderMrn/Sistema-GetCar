@@ -12,6 +12,9 @@
             <?php if(validation_errors()): ?>
                 <div class="alert alert-danger"><?php echo validation_errors(); ?></div>
             <?php endif; ?>
+             <?php if($this->session->flashdata('success')): ?>
+                    <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
+                <?php endif; ?>
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-12">
@@ -42,7 +45,7 @@
                                         
                                         <div class="form-group">
                                             <label>Nome do usuário</label>
-                                            <input type="text" class="form-control" name="nome" id="nome" value="<?php echo isset($nome)? $nome : '' ?>">
+                                            <input type="text" disabled class="form-control" name="nome" id="nome" value="<?php echo isset($nome)? $nome : '' ?>" >
                                         </div>
                                      
                                     </div>

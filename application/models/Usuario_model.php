@@ -148,9 +148,9 @@ class Usuario_model extends CI_Model {
             $id = $_POST['id'];
             $valor = $_POST['valor'];
             
-            $this->db->set('saldo', $valor);
+            $this->db->set('saldo', 'saldo+' . $valor, FALSE);
             $this->db->where('id', $id);
-            $this->db->update($table_name);
+            $this->db->update('usuario');
         }
 
 
