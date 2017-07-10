@@ -1,36 +1,65 @@
 <?php
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ponto_model extends CI_Model {
-
-    private $table_name = "ponto_locacao";
-
-
-        public $nome;
-        public $endereco;
-
-    
-
-    public function getAll($id)
-        {
-
-            $query = $this->db->select('p.id, p.nome, p.endereco')
-                  ->from('ponto_locacao p')
-                  ->join('ponto_to_adm pta', 'p.id = pta.id_ponto')
-                  ->where('pta.id_adm', $id)
-                  ->join('administrador a', 'a.id = pta.id_adm')
-                  ->get();
-
-            return $query->result_array();
-        }
-
+  
     public function insert()
         {
-            $this->nome    = $_POST['nome']; // please read the below note
-            $this->endereco  = $_POST['endereco'];
 
-            $this->db->insert('ponto_locacao', $this);
+          $ponto = new Entity\Ponto();
+
+          $ponto->setNome($_POST['nome']);
+          $ponto->setEndereco($_POST['endereco']);
+
+          $this->doctrine->em->persist($ponto);
+          $this->doctrine->em->flush();
+
+        }
+
+        public function update()
+        {
+          $id = $_POST['id'];
+
+          $ponto = $this->doctrine->em->find('Entity\Ponto', $id);
+
+          $ponto->setNome($_POST['nome']);
+          $ponto->setEndereco($_POST['endereco']);
+
+          $this->doctrine->em->persist($ponto);
+          $this->doctrine->em->flush();
+
+        }
+
+        public function getAll()
+        {
+
+          $Repository = $this->doctrine->em->getRepository('Entity\Ponto');
+          $pontos = $Repository->findAll();
+
+          return $pontos;
+        }
+
+        public function getById($id)
+        {
+
+          $ponto = $this->doctrine->em->find('Entity\Ponto', $id);
+          return $ponto;
+        }
+
+        public function delete($id = null)
+        {
+
+          if($id !== null){
+                $ponto = $this->doctrine->em->find('Entity\Ponto', $id);            
+            }elseif(isset($_POST['id'])){
+               $ponto = $this->doctrine->em->find('Entity\Ponto', $_POST['id']);
+            }
+            $this->doctrine->em->remove($ponto);
+            $this->doctrine->em->flush();
+            return true;
         }
 
 }

@@ -40,18 +40,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
                                        <?php foreach ($pontos as $ponto) { 
+
                                                 echo '<tr>';
-                                                echo ' <td>'.$ponto['id'].'</td>';
-                                                echo ' <td>'.$ponto['nome'].'</td>';
-                                                echo ' <td>'.$this->session->admin['nome'].'</td>';
-                                                echo ' <td>'.$ponto['endereco'].'</td>';
+                                                echo ' <td>'.$ponto->getId().'</td>';
+                                                echo ' <td>'.$ponto->getNome().'</td>';
+                                                echo ' <td>'.$ponto->getEndereco().'</td>';
+                                                echo ' <td>'.$this->session->admin['nome'].'</td>';                                                
                                                 echo '<td class="text-center">';
-                                                echo anchor('', 'Ver', array('class' => 'btn btn-primary'));
+                                                echo anchor('painel/pontos/'. $ponto->getId(), 'Ver', array('class' => 'btn btn-primary'));
                                                 echo '&nbsp';
-                                                echo anchor('', 'Ediar', array('class' => 'btn btn-primary'));
-                                                 echo '&nbsp';
-                                                echo anchor('', 'Deletar', array('class' => 'btn btn-danger'));
+                                                echo anchor('painel/pontos/editar/' . $ponto->getId(), 'Ediar', array('class' => 'btn btn-primary'));
+                                                echo '&nbsp';
+                                                echo anchor('#', 'Deletar', 
+                                                        array(
+                                                        'class' => 'btn btn-danger',
+                                                        'data-id-ponto' =>  $ponto->getId(),
+                                                        'data-nome-ponto' =>  $ponto->getNome(),
+                                                        'data-toggle' => 'modal',
+                                                        'data-target' => '#deletePonto'));
                                                 echo '</td>';
                                                 echo '</tr>';
                                          } ?>
@@ -85,3 +93,21 @@
     </div>
     <!-- /#wrapper -->
 
+<div class="modal fade" id="deletePonto" tabindex="-1" role="dialog" aria-labelledby="deletePontoLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong class="modal-title"><i class="glyphicon glyphicon-trash"></i> Excluir</strong>
+      </div>
+      <div class="modal-body text-center">
+        <?php echo form_open('ponto_controller/ponto_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => '')); ?>
+            Tem certeza que deseja excluir o ponto <strong></strong> ?
+        <?php echo form_close(); ?>
+        <hr>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-success btn_to_action_form">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>

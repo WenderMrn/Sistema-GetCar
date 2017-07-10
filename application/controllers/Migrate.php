@@ -189,60 +189,33 @@ class Migrate extends CI_Controller
                     );
                     $this->db->insert('avaliacao', $admin_data);
 
-                    
-
                     echo "<h3>Migração avaliacao concluida</h3>";
                 }
 
-                if ($this->migration->version(4) === FALSE)
+                 if ($this->migration->version(4) === FALSE)
                 {
                     show_error($this->migration->error_string());
                 }else{
 
-                    $this->db->truncate('ponto_locacao');
-                                       
-                    $ponto_locacao_data = array(
-                        'nome' => 'Ponto luxo',
-                        'endereco' => 'Rua das graças, número 3, Cristo' 
+                    $this->db->truncate('ponto');
+                    // $this->db->truncate('usuario');
+
+                    $ponto_data = array(
+                        'nome' => 'ponto certo',
+                        'endereco' => 'rua do rio' 
                     );
 
-                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
+                    $this->db->insert('ponto', $ponto_data);
 
-                    $ponto_locacao_data = array(
-                        'nome' => 'Ponto Certo',
-                        'endereco' => 'Rua do rio, número 36, centro' 
+                     $ponto_data = array(
+                        'nome' => 'uber',
+                        'endereco' => 'rua azul' 
                     );
 
-                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
-
-                    $ponto_locacao_data = array(
-                        'nome' => 'Ponto Esquina do beco',
-                        'endereco' => 'Avenida beira rio, número 56, Torre' 
-                    );
-
-                    $this->db->insert('ponto_locacao', $ponto_locacao_data);
-                                                        
-
-                    echo "<h3>Migração ponto de locação concluida</h3>";
+                    $this->db->insert('ponto', $ponto_data);
+                    echo "<h3>Migração ponto concluida</h3>";
                 }
 
-                if ($this->migration->version(5) === FALSE)
-                {
-                    show_error($this->migration->error_string());
-                }else{
-
-                    $this->db->truncate('ponto_to_adm');
-                                       
-                    $ponto_to_adm_data = array(
-                        'id_ponto' => 1,
-                        'id_adm' => 1
-                    );
-
-                    $this->db->insert('ponto_to_adm', $ponto_to_adm_data);
-                                                        
-
-                    echo "<h3>Migração ponto de locação com administrador concluida</h3>";
-                }
         }
 
 }

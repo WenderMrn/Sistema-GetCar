@@ -77,3 +77,23 @@
         </div>
         <!-- /#page-wrapper -->
 </div>
+
+
+<div class="modal fade" id="deletePonto" tabindex="-1" role="dialog" aria-labelledby="deletePontoLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong class="modal-title"><i class="glyphicon glyphicon-trash"></i> Excluir</strong>
+      </div>
+      <div class="modal-body text-center">
+        <?php echo form_open('ponto_controller/ponto_delete_post', array('id' => 'form_hidden_to_submit'), array('id' => '')); ?>
+            Tem certeza que deseja excluir o ponto <strong></strong> ?
+        <?php echo form_close(); ?>
+        <hr>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-success btn_to_action_form">Sim</button>
+      </div>
+    </div>
+  </div>
+</div>

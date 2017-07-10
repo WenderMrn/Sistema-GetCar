@@ -1,4 +1,6 @@
 <?php
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Categoria_controller extends CI_Controller {
 
@@ -18,20 +20,20 @@ class Categoria_controller extends CI_Controller {
 
 	public function addProduto(){
 
-		$categoria = $this->doctrine->em->find('Entity\Categoria', 5);
+		$categoria = $this->doctrine->em->find('Entity\Categoria', 4);
 
 		// instanciamos um novo produto (mais uma vez, obrigado autoload!)
-		$produto = new Entity\Produto();
-		 
-		//setamos o nome deste produto
-		$produto->setNome('dvd');
+		$produto = $this->doctrine->em->find('Entity\Produto', 6);
+
 		 
 		/**
 		 * 
 		 * Aqui acontece uma mágica. Já recuperamos o objeto da categoria que desejamos,
 		 * basta adicioná-lo agora ao produto, através do método setCategoria
 		 */
-		$produto->setCategoria($categoria);
+
+		$produto->getCategorias()->add($categoria);
+		
 		 
 		// aqui já está dominado, certo?
 		$this->doctrine->em->persist($produto);
@@ -39,10 +41,10 @@ class Categoria_controller extends CI_Controller {
 	}
 
 	public function getProduto(){
-		$produto = $this->doctrine->em->find('Entity\Produto', 7);
- 
+		$produto = $this->doctrine->em->find('Entity\Produto', 6);
+ 		$categorias = new ArrayCollection();
 		// Ok, você já sabe o que isto faz
-		$nome = $produto->getNome();
+		$categorias = $produto->getCategorias();
 		 
 		/**
 		 * 
@@ -53,17 +55,32 @@ class Categoria_controller extends CI_Controller {
 		 * Lembre-se. O getNome da linha 14 faz referência à entidade Produto,
 		 * já o getNome da linha abaixo faz referência à classe Categoria
 		 */
-		$categoria = $produto->getCategoria()->getNome();
+		
 		 
 		//para encerrar, apresento os dois dados capturados.
 		 
-		echo $nome . "<br />";
-		echo $categoria;
+		
+			foreach ($categorias as $categoria) {
+				echo $categoria->getNome();
+			}
+		
+		
+	}
+
+	public function dellCatProduto(){
+		$produto = $this->doctrine->em->find('Entity\Produto', 6);
+ 		$categorias = new ArrayCollection();
+		// Ok, você já sabe o que isto faz
+		$categorias = $produto->getCategorias();
+		$cat = $categorias->get(5);
+
+		var_dump($categorias);
+	
 	}
 
 	public function dell(){
 
-		$excluir = $this->doctrine->em->find('Entity\Categoria', 5);
+		$excluir = $this->doctrine->em->find('Entity\Categoria', 4);
 
 		$this->doctrine->em->remove($excluir);
 		$this->doctrine->em->flush();

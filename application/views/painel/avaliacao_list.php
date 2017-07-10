@@ -45,12 +45,13 @@
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
 
-                                    <div class="row ">
+                                    
 
+                                        <?php 
                                         
-
-                                        <?php foreach ($avaliacoes as $row): ?>
-                                        <div class="col-sm-6 col-md-4">
+                                        foreach ($avaliacoes as $row): ?>
+                                        <div class="row ">
+                                        <div class="col-md-12">
                                             <div class="thumbnail">
                                               
                                               <div class="caption">
@@ -91,10 +92,12 @@
                                               </div>
                                             </div>
                                           </div>
+                                          </div>
+                                  
+                                        
                                         <?php endforeach; ?>
                                          
-                                    </div>
-                                  
+                                    
                                     
                                     
                                 </div>

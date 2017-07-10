@@ -2,12 +2,12 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Migration_Add_ponto_locacao extends CI_Migration {
+class Migration_Add_ponto extends CI_Migration {
 
         public function up()
         {
                 $this->dbforge->add_field(array(
-                        'id' => array(
+                        'idPonto' => array(
                                 'type' => 'INT',
                                 'constraint' => 5,
                                 'unsigned' => TRUE,
@@ -23,13 +23,13 @@ class Migration_Add_ponto_locacao extends CI_Migration {
                         )
                         
                 ));
-                $this->dbforge->add_key('id', TRUE);
-                $this->dbforge->create_table('ponto_locacao');
+                $this->dbforge->add_key('idPonto', TRUE);
+                $this->dbforge->create_table('ponto');
 
         }
 
         public function down()
         {
-                $this->dbforge->drop_table('ponto_locacao');
+                $this->dbforge->drop_table('ponto');
         }
 }
