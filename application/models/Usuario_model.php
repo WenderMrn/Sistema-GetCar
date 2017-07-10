@@ -15,6 +15,7 @@ class Usuario_model extends CI_Model {
         public $cartao_credito;
         public $endereco;
         public $aprovado;
+        public $saldo;
 
         public function getAll()
         {
@@ -64,6 +65,15 @@ class Usuario_model extends CI_Model {
             $this->senha            = md5($_POST['senha']);
 
             $this->db->insert($this->table_name, $this);
+        }
+
+        public function creditar()
+        {
+            $data = array(
+            $this->saldo = $_POST['valor']
+            );
+            
+            $this->db->replace($table_name, $data);
         }
 
         public function email_check($email){

@@ -495,5 +495,39 @@ class Painel_controller extends CI_Controller {
 		
 	}
 
+	public function credito(){
 	
+		$this->load->view('templates/panel_template/header');
+		$this->load->view('painel/admin_inserir_credito');
+		$this->load->view('templates/panel_template/footer');
+	
+	}
+
+	public function credito_add_post(){
+		$this->load->model('usuario_model');
+
+		$this->load->library('form_validation');
+
+        $this->form_validation->set_rules('nome', 'Nome', 'trim|min_length[3]|callback_valida_nome|required',
+        	array('valida_nome' => 'Nome inválido. (Insira seu nome completo, sem numeros)')
+        );
+        $this->form_validation->set_rules('cpf', 'CPF', 'trim|required|min_length[14]|callback_valida_cpf|callback_admin_cpf_check',
+        	array(
+        		'admin_cpf_check' => 'CPF já cadastrado',
+        		'valida_cpf' => 'CPF Inválido'
+        		)
+        );
+        $this->form_validation->set_rules('valor', 'Valor', 'required');
+        
+        if ($this->form_validation->run() == TRUE){
+        	$this->usuario_model->creditar();
+            $this->session->set_flashdata('success', 'creditado com sucesso!');
+        	redirect('painel/credito','refresh');
+        }else{
+        	$this->credito();
+        }
+
+	}
+
+
 }

@@ -335,7 +335,11 @@
                         </li>
                         <li>
                             
-                            <?php echo anchor('painel/pontos', '<i class="fa fa-dashboard fa-fw"></i> Pontos de locação</span>'); ?>
+                            <?php echo anchor('painel/pontos', '<i class="glyphicon glyphicon-map-marker"></i> Pontos de locação</span>'); ?>
+                        </li>
+                        <li>
+                            
+                            <?php echo anchor('painel/credito', '<i class="glyphicon glyphicon-usd"></i> Inserir Crédito</span>'); ?>
                         </li>
                     </ul>
                 </div>

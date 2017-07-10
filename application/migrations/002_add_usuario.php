@@ -45,7 +45,13 @@ class Migration_Add_usuario extends CI_Migration {
                                 'type' => 'INT',
                                 'constraint' => 5,
                                 'default' => 0
+                        ),
+                        'saldo' => array(
+                                'type' => 'INT',
+                                'constraint' => 8,
+                                'default' => 0
                         )
+
                         
                 ));
                 $this->dbforge->add_key('id', TRUE);
