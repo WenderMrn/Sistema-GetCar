@@ -33,7 +33,7 @@ class Ponto_model extends CI_Model {
 
         }
 
-        public function getAll()
+        public function getAll() 
         {
 
           $Repository = $this->doctrine->em->getRepository('Entity\Ponto');
