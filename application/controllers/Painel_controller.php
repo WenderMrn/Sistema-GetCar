@@ -529,8 +529,8 @@ class Painel_controller extends CI_Controller {
         		)
         );
 
-        $this->form_validation->set_rules('valor', 'Valor', 'is_natural_no_zero|required|greater_than[10]',
-        	array('greater_than' => 'Informe o valor maior que dez', 'is_natural_no_zero' => 'Informe apenas valores numéricos')
+        $this->form_validation->set_rules('valor', 'Valor', 'is_natural_no_zero|required|greater_than[9]',
+        	array('greater_than' => 'Informe um valor maior ou igual a dez', 'is_natural_no_zero' => 'Informe apenas valores numéricos')
         );
         
         
