@@ -156,12 +156,9 @@ class Usuario_model extends CI_Model {
 
         public function searchByCpf($search)
         {
-            $query = $this->db->select('nome')
-                ->like('cpf', $search)
+            $query = $this->db->select('id, nome')
+                ->where('cpf', $search)
                 ->get($this->table_name);
-            // $query = $this->db->get_where('usuario', array('nome' => $search))->or_where('cpf', $search);
-
-            // var_dump($query->result_array()); exit;
             return $query->result_array();
         }
 

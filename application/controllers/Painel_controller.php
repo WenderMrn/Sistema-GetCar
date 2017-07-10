@@ -510,6 +510,7 @@ class Painel_controller extends CI_Controller {
 		$search = $this->input->post('cpf');
 
 		$result = $this->usuario_model->searchByCpf($search);
+		// $result["debug"][1] = $search;
 		$this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($result));
