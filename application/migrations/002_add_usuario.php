@@ -49,7 +49,7 @@ class Migration_Add_usuario extends CI_Migration {
                         'saldo' => array(
                                 'type' => 'INT',
                                 'constraint' => 8,
-                                'default' => 0
+                                'null' => TRUE
                         )
 
                         
