@@ -41,8 +41,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_show', $data);
@@ -60,8 +60,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_edit', $data);
@@ -100,19 +100,20 @@ class Painel_controller extends CI_Controller {
         	redirect('painel/administradores/editar/' . $this->input->post('id'),'refresh');
         }
 
+
+
         $this->session->set_flashdata('errors', validation_errors());
         $this->load->view('templates/panel_template/header');
-		$this->load->view('painel/admin_edit', $this->input->post());
+		$this->load->view('painel/admin_edit', array('admin' => $this->administrador_model->create()));
 		$this->load->view('templates/panel_template/footer');
 
 	}
 
 	public function admin_add(){
-
-		$admin_data = $this->input->post();
+		$this->load->model('administrador_model');
 			
 		$this->load->view('templates/panel_template/header');
-		$this->load->view('painel/admin_add', $admin_data);
+		$this->load->view('painel/admin_add', array('admin' => $this->administrador_model->create()));
 		$this->load->view('templates/panel_template/footer');
 	
 	}
@@ -169,8 +170,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_delete', $data);

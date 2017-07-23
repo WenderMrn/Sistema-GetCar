@@ -25,16 +25,16 @@
                         
                         <div class="panel-body">
                             <div class="row">
-                                <?php echo form_open('painel_controller/admin_edit_post', '', array('id' => $id)); ?>
+                                <?php echo form_open('painel_controller/admin_edit_post', '', array('id' => $admin->getId())); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome</label>
-                                            <input class="form-control" name="nome" id="nome" value="<?php echo $nome; ?>">
+                                            <input class="form-control" name="nome" id="nome" value="<?php echo $admin->getNome(); ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control formataCPF" name="cpf" maxlength="14" id="cpf" value="<?php echo $cpf; ?>">
+                                            <input class="form-control formataCPF" name="cpf" maxlength="14" id="cpf" value="<?php echo $admin->getCpf(); ?>">
                                         </div>
 
                                         
@@ -45,7 +45,7 @@
                                         
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
+                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $admin->getEmail(); ?>">
                                         </div>
                                     
                                         <div class="form-group">

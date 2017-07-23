@@ -26,22 +26,22 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h3 class="text-center"><strong><?php echo $nome; ?></strong></h3>
+                                    <h3 class="text-center"><strong><?php echo $admin->getNome(); ?></strong></h3>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12"><strong>Email: </strong><?php echo $email; ?></div>
+                                <div class="col-lg-12"><strong>Email: </strong><?php echo $admin->getEmail(); ?></div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12"><strong>CPF: </strong><?php echo $cpf; ?></div>
+                                <div class="col-lg-12"><strong>CPF: </strong><?php echo $admin->getCpf(); ?></div>
                             </div>
                             <div class="row">
 
                             </div>
                             <div class="row" style="margin-top: 50px;">
                                 <div class="col-lg-12">
-                                    <?php echo anchor('painel/administradores/editar/' . $id, 'Editar', array('class' => 'btn btn-primary')); ?>
-                                    <?php echo anchor('painel/administradores/deletar/' . $id, 'Excluir', array('class' => 'btn btn-danger')); ?>
+                                    <?php echo anchor('painel/administradores/editar/' . $admin->getId(), 'Editar', array('class' => 'btn btn-primary')); ?>
+                                    <?php echo anchor('painel/administradores/deletar/' . $admin->getId(), 'Excluir', array('class' => 'btn btn-danger')); ?>
                                 </div>
                                 
                             </div>

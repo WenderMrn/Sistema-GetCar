@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Usuario_model extends CI_Model {
 
         private $table_name = 'usuario';
+        private $Repository;
 
         public $id;
         public $nome;
@@ -17,72 +18,68 @@ class Usuario_model extends CI_Model {
         public $aprovado;
         public $saldo;
 
+        public function __construct(){
+            parent::__construct();
+            $this->Repository = $this->doctrine->em->getRepository('Entity\Usuario');
+
+        }
+
         public function getAll()
         {
-            $query = $this->db->get('usuario');
-            return $query->result_array();
+            $administradores = $this->Repository->findAll();
+            return $administradores;
         }
 
         public function getPendingUsers()
         {
-            $query = $this->db->get_where('usuario', array('aprovado' => 0));
-            return $query->result_array();
+            $administradores = $this->Repository->findBy(array('aprovado' => 0));
+            return $administradores;
         }
 
         public function getById($id)
         {
-            $query = $this->db->get_where('usuario', array('id' => $id)); 
-            return $query->result_array();
+            $administradores = $this->Repository->find($id);
+            return $administradores;
         }
 
-        public function searchByNameOrCpf($search = 'Usu')
+        public function searchByNameOrCpf($search = '')
         {
-            $query = $this->db->select('*')
-                ->like('nome', $search)
-                ->or_like('cpf', $search)
-                // ->or_where('cpf', $search)
-                ->get($this->table_name);
-            // $query = $this->db->get_where('usuario', array('nome' => $search))->or_where('cpf', $search);
-
-            // var_dump($query->result_array()); exit;
-            return $query->result_array();
-        }
-
-        public function __construct()
-        {
-            parent::__construct();
+            return $this->Repository->createQueryBuilder($this->table_name)
+            ->Where('usuario.nome LIKE :search OR usuario.cpf LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getArrayResult();
         }
 
         public function insert()
         {
-            $this->nome             = $_POST['nome']; // please read the below note
-            $this->email            = $_POST['email'];
-            $this->cpf              = $_POST['cpf'];
-            $this->cep              = $_POST['cep'];
-            $this->cartao_credito   = $_POST['cartao_credito'];
-            $this->endereco         = $_POST['endereco'];
-            $this->aprovado         = 0;
-            $this->senha            = md5($_POST['senha']);
+            $usuario = new Entity\Usuario();
 
-            $this->db->insert($this->table_name, $this);
+            $usuario->setNome($this->input->post('nome'));
+            $usuario->setEmail($this->input->post('email'));
+            $usuario->setCpf($this->input->post('cpf'));
+            $usuario->setCep($this->input->post('cep'));
+            $usuario->setCartaoCredito($this->input->post('cartao_credito'));
+            $usuario->setEndereco($this->input->post('endereco'));
+            $usuario->setAprovado(0);
+            $usuario->setSenha(md5($this->input->post('senha')));
+
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
         }
 
         public function email_check($email){
             
-            $query = $this->db->select('*')
-                ->where('email', $email)
-                ->get($this->table_name);
+            $usuario = $Repository->findOneByEmail($email);
 
-            return empty($query->result_array());
+            return is_null($usuario);
         }
 
         public function cpf_check($cpf){
             
-            $query = $this->db->select('*')
-                ->where('cpf', $cpf)
-                ->get($this->table_name);
+            $usuario = $Repository->findOneByCpf($cpf);
 
-            return empty($query->result_array());
+            return is_null($usuario);
         }
 
         public function delete($id = null)

@@ -39,11 +39,11 @@
                                     <tbody>
                                         <?php foreach ($administradores as $row): ?>
                                             <tr>
-                                                <td><?php echo $row['id']; ?></td>
+                                                <td><?php echo $row->getId(); ?></td>
                                                 
-                                                <td><?php echo anchor('painel/administradores/' . $row['id'], $row['nome']); ?></td>
-                                                <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['cpf']; ?></td>
+                                                <td><?php echo anchor('painel/administradores/' . $row->getId(), $row->getNome()); ?></td>
+                                                <td><?php echo $row->getEmail(); ?></td>
+                                                <td><?php echo $row->getCpf(); ?></td>
                                                 
                                             </tr>
 

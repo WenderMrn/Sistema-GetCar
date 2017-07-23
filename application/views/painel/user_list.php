@@ -65,14 +65,14 @@
                                             <tbody>
                                                 <?php foreach ($usuarios as $row): ?>
                                                     <tr>
-                                                        <td><?php echo $row['id']; ?></td>
-                                                        <td><?php echo anchor('painel/usuarios/' . $row['id'], $row['nome']); ?></td>
-                                                        <td><?php echo $row['email']; ?></td>
-                                                        <td><?php echo $row['cpf']; ?></td>
+                                                        <td><?php echo $row->getId(); ?></td>
+                                                        <td><?php echo anchor('painel/usuarios/' . $row->getId(), $row->getNome()); ?></td>
+                                                        <td><?php echo $row->getNome(); ?></td>
+                                                        <td><?php echo $row->getCpf(); ?></td>
                                                         <td>
-                                                            <?php if($row['aprovado'] == 0): ?>
+                                                            <?php if($row->getAprovado() == 0): ?>
                                                                 <span class="label label-warning">Aprovação pendente</span>
-                                                            <?php elseif($row['aprovado'] == 1): ?>
+                                                            <?php elseif($row->getAprovado() == 1): ?>
                                                                 <span class="label label-success">Aprovado</span>
                                                             <?php else: ?>
                                                                 <span class="label label-danger">Aprovação negada</span>
@@ -136,13 +136,13 @@
                                             <tbody>
                                                 <?php foreach ($usuarios_pendentes as $row): ?>
                                                     <tr>
-                                                        <td><?php echo $row['id']; ?></td>
-                                                        <td><?php echo anchor('painel/usuarios/' . $row['id'], $row['nome']); ?></td>
-                                                        <td><?php echo $row['email']; ?></td>
-                                                        <td><?php echo $row['cpf']; ?></td>
+                                                        <td><?php echo $row->getId(); ?></td>
+                                                        <td><?php echo anchor('painel/usuarios/' . $row->getId(), $row->getNome()); ?></td>
+                                                        <td><?php echo $row->getEmail(); ?></td>
+                                                        <td><?php echo $row->getCpf(); ?></td>
                                                         <td>
-                                                            <?php echo anchor('painel/usuarios/aprovar/'.$row['id'], 'Aprovar', array('class' => 'btn btn-success')); ?>
-                                                            <?php echo anchor('painel/usuarios/negar/'.$row['id'], 'Negar', array('class' => 'btn btn-danger')); ?>
+                                                            <?php echo anchor('painel/usuarios/aprovar/'.$row->getId(), 'Aprovar', array('class' => 'btn btn-success')); ?>
+                                                            <?php echo anchor('painel/usuarios/negar/'.$row->getId(), 'Negar', array('class' => 'btn btn-danger')); ?>
                                                             
                                                         </td>
                                                         
@@ -204,9 +204,9 @@
                         $("#user_result > tbody").html("<tr><td colspan='5' class='text-center'>Nenhum resultado encontrado para essa pesquisa.</td></tr>");
                     }else{
                         $.each(result,function(index, elemento) {
-                            // console.log(elemento['nome']);
+                            console.log(elemento);
                             var tr = $("<tr></tr>");
-                            tr.append('<td>'+elemento['id']+'</td>');
+                            tr.append('<td>'+elemento.id+'</td>');
                             var nome = $("<a href=''></a>");
                             nome.attr('href', base_url_show+elemento['id']);
                             nome.text(elemento['nome']);
