@@ -112,6 +112,7 @@ class Usuario_model extends CI_Model {
                 $data['id'] = $result->getId();
                 $data['nome'] = $result->getNome();
                 $data['email'] = $result->getEmail();
+                $data['aprovado'] = $result->getAprovado();
                 return $data;
             }
             
