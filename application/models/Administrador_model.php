@@ -68,16 +68,18 @@ class Administrador_model extends CI_Model {
         }
 
         public function validate(){
-            $this->email  = $_POST['email'];
-            $this->senha  = md5($_POST['senha']);
 
-            $data = array('email' => $_POST['email'], 'senha' => md5($_POST['senha']));
+            $data = array('email' => $this->input->post('email'), 'senha' => md5($this->input->post('senha')));
 
             $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
-            $result = $Repository->findBy($data);
+            $result = $Repository->findOneBy($data);
             
             if($result){
-                return $result;
+                $data = array();
+                $data['id'] = $result->getId();
+                $data['nome'] = $result->getNome();
+                $data['email'] = $result->getEmail();
+                return $data;
             }
             
             return false;
@@ -89,6 +91,10 @@ class Administrador_model extends CI_Model {
             $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
             $administrador = $Repository->find($this->input->post('id'));
 
+            if(!$administrador){
+                return false;
+            }
+
             $administrador->setNome($_POST['nome']);
             $administrador->setEmail($_POST['email']);
             $administrador->setCpf($_POST['cpf']);
@@ -99,6 +105,7 @@ class Administrador_model extends CI_Model {
 
             $this->doctrine->em->persist($administrador);
             $this->doctrine->em->flush();
+            return true;
         }
 
         public function create(){

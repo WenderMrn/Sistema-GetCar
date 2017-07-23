@@ -25,26 +25,26 @@
                         
                         <div class="panel-body">
                             <div class="row">
-                                <?php echo form_open('painel_controller/user_edit_post', '', array('id' => $id)); ?>
+                                <?php echo form_open('painel_controller/user_edit_post', '', array('id' => $usuario->getId())); ?>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome Completo</label>
-                                            <input class="form-control" name="nome" id="nome" value="<?php echo isset($nome)? $nome : '' ?>">
+                                            <input class="form-control" name="nome" id="nome" value="<?php echo $usuario->getNome(); ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
+                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo $usuario->getCpf(); ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label>Endereço</label>
-                                            <input class="form-control" name="endereco" id="endereco" value="<?php echo isset($endereco)? $endereco : '' ?>">
+                                            <input class="form-control" name="endereco" id="endereco" value="<?php echo $usuario->getEndereco(); ?>">
                                         </div>
 
                                         <div class="form-group">
                                             <label>CEP</label>
-                                            <input class="form-control formataCEP" name="cep" id="cep" maxlength="10" value="<?php echo isset($cep)? $cep : '' ?>">
+                                            <input class="form-control formataCEP" name="cep" id="cep" maxlength="10" value="<?php echo $usuario->getCep(); ?>">
                                         </div>
                                         
                                         
@@ -54,12 +54,12 @@
 
                                         <div class="form-group">
                                             <label>Cartão de Crédito</label>
-                                            <input class="form-control" name="cartao_credito" id="cpf" value="<?php echo isset($cartao_credito)? $cartao_credito : '' ?>">
+                                            <input class="form-control" name="cartao_credito" id="cpf" value="<?php echo $usuario->getCartaoCredito(); ?>">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($email)? $email : '' ?>">
+                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $usuario->getEmail(); ?>">
                                         </div>
                                     
                                         <div class="form-group">

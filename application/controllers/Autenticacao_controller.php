@@ -33,10 +33,10 @@ class Autenticacao_controller extends CI_Controller {
 		
 		if($result['user']){
 
-			if($result['user']['aprovado'] == 0){
+			if($result['user']['id'] == 0){
 				$this->session->set_flashdata('alert_login', 'Seu cadastro ainda está pendente. Aguarde um momento e tente novamente.');
 				redirect('login', 'refresh');
-			}elseif($result['user']['aprovado'] == 2){
+			}elseif($result['user']['id'] == 2){
 				$this->session->set_flashdata('error_login', 'Infelizmente seu cadastro foi negado. Por favor, contacte-nos para maiores informações.');
 				redirect('login', 'refresh');
 			}else{

@@ -26,38 +26,44 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h3 class="text-center"><strong><?php echo $nome; ?></strong></h3>
-                                    <?php if($aprovado): ?>
+                                    <h3 class="text-center"><strong><?php echo $usuario->getNome(); ?></strong></h3>
+                                    <?php if($usuario->getAprovado() == 1): ?>
                                         <div class="col-lg-12">
                                             <h4 class="text-center">
                                                 <span class="label label-success label-lg">Cadastro aprovado</span>
                                             </h4>
                                         </div>
-                                    <?php else: ?>
+                                    <?php elseif($usuario->getAprovado() == 0): ?>
                                         <div class="col-lg-12">
                                             <h4 class="text-center">
                                                 <span class="label label-warning label-lg">Cadastro pendente de aprovação</span>
                                             </h4>
                                         </div>
-                                    <?php endif ?>
+                                    <?php else: ?>
+                                        <div class="col-lg-12">
+                                            <h4 class="text-center">
+                                                <span class="label label-danger label-lg">Cadastro Negado</span>
+                                            </h4>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12"><strong>Email: </strong><?php echo $email; ?></div>
+                                <div class="col-lg-12"><strong>Email: </strong><?php echo $usuario->getEmail(); ?></div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12"><strong>CPF: </strong><?php echo $cpf; ?></div>
+                                <div class="col-lg-12"><strong>CPF: </strong><?php echo $usuario->getCpf(); ?></div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12"><strong>Endereço: </strong><?php echo $endereco; ?></div>
+                                <div class="col-lg-12"><strong>Endereço: </strong><?php echo $usuario->getEndereco(); ?></div>
                             </div>
                             <div class="row">
 
                             </div>
                             <div class="row" style="margin-top: 50px;">
                                 <div class="col-lg-12">
-                                    <?php echo anchor('painel/usuarios/editar/' . $id, 'Editar', array('class' => 'btn btn-primary')); ?>
-                                    <?php echo anchor('painel/usuarios/deletar/' . $id, 'Excluir', array('class' => 'btn btn-danger')); ?>
+                                    <?php echo anchor('painel/usuarios/editar/' . $usuario->getId(), 'Editar', array('class' => 'btn btn-primary')); ?>
+                                    <?php echo anchor('painel/usuarios/deletar/' . $usuario->getId(), 'Excluir', array('class' => 'btn btn-danger')); ?>
                                 </div>
                                 
                             </div>

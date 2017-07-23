@@ -19,8 +19,16 @@ class Avaliacao_controller extends CI_Controller {
         $this->load->model('avaliacao_model');
 
         $data = array();
-        $avaliacoes = $this->avaliacao_model->verificar_avaliacao($user['id']);
-        $data['status_avaliacao'] = $avaliacoes;
+        $avaliacao = $this->avaliacao_model->verificar_avaliacao($user['id']);
+        
+        if($avaliacao){
+            $data['ja_avaliado'] = true;
+            $data['avaliacao'] = $avaliacao;
+        }else{
+            $data['ja_avaliado'] = false;
+            $data['avaliacao'] = new Entity\Avaliacao();
+        }
+        
         $this->load->view('templates/shop_template/header');
 		$this->load->view('shop/avaliacao', $data);
 		$this->load->view('templates/shop_template/footer');
@@ -35,12 +43,15 @@ class Avaliacao_controller extends CI_Controller {
 	}
 
     public function register_avaliacao(){
+        $this->load->model('avaliacao_model');
+        $user = $this->session->userdata('user');
+
         if($this->addAvaliacao()){
             $this->session->set_flashdata('success_avaliacao', 'Agradecemos sua avaliação!');
             redirect('shop/avaliacao','refresh');
         }
         $this->load->view('templates/shop_template/header');
-        $this->load->view('shop/avaliacao', $this->input->post());
+        $this->load->view('shop/avaliacao', array('ja_avaliado' => false, 'avaliacao' => $this->avaliacao_model->create()));
         $this->load->view('templates/shop_template/footer');
        
     }
@@ -51,15 +62,15 @@ class Avaliacao_controller extends CI_Controller {
 
         $this->form_validation->set_rules('comentario', 'Comentário', 'required','');
 
-         $this->form_validation->set_rules('satisfacao', 'Satisfação', 'required','');
+        $this->form_validation->set_rules('satisfacao', 'Satisfação', 'required','');
 
-         $avaliacoes = $this->avaliacao_model->getAll();
+        $avaliacoes = $this->avaliacao_model->getAll();
 
         if ($this->form_validation->run() == TRUE){
             $this->avaliacao_model->insert();
             return true;
         }
         return false;
-        }
+    }
 
 }

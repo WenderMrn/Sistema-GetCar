@@ -51,9 +51,9 @@ class Usuario
     protected $aprovado;
 
     /**
-     * @Column(type="string", name="saldo")
+     * @Column(type="float", name="saldo")
      */
-    protected $saldo;
+    protected $saldo = 0;
 
     /**
      * @Column(type="string", name="cep")
@@ -135,6 +135,10 @@ class Usuario
  
     public function setCep($cep) {
         $this->cep = $cep;
+    }
+
+    public function creditar($valor){
+        $this->saldo += $valor;
     }
 
 }
