@@ -26,21 +26,21 @@
                 <?php endif; ?>
 
             	<div class="well">
-                    <?php if ($status_avaliacao == null) {?>
+                    <?php if (!$ja_avaliado) {?>
 
                     <?php echo form_open('avaliacao_controller/register_avaliacao'); ?>
                         <div class="form-group">
                             <label>Nível de satisfação</label>
                             <select name="satisfacao" id="satisfacao"  class="form-control">
                                 <option value="">Escolha uma opção</option>
-                                <option value="1">1</option>
-                                 <option value="2">2</option>
-                                 <option value="3">3</option>
-                                 <option value="4">4</option>
-                                 <option value="5">5</option>
+                                <option value="1" <?php echo ($avaliacao->getSatisfacao() == 1)? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo ($avaliacao->getSatisfacao() == 2)? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo ($avaliacao->getSatisfacao() == 3)? 'selected' : ''; ?>>3</option>
+                                <option value="4" <?php echo ($avaliacao->getSatisfacao() == 4)? 'selected' : ''; ?>>4</option>
+                                <option value="5" <?php echo ($avaliacao->getSatisfacao() == 5)? 'selected' : ''; ?>>5</option>
                             </select><br>
                             <label>Comentário</label>
-                            <textarea class="form-control" name="comentario" id="comentario" ></textarea>
+                            <textarea class="form-control" name="comentario" id="comentario" ><?php echo $avaliacao->getComentario(); ?></textarea>
                             
                         </div>
                         <div class="row">
@@ -56,8 +56,8 @@
 
                     <?php }else{ ?>
                         <h4>Você já avaliou nosso aplicativo</h4>
-                        <p><strong>Nota: <?php echo $status_avaliacao['0']['satisfacao']; ?> </strong></p>
-                        <p><strong>Comentário: <?php echo $status_avaliacao['0']['comentario']; ?> </strong></p>
+                        <p><strong>Nota: <?php echo $avaliacao->getSatisfacao(); ?> </strong></p>
+                        <p><strong>Comentário: <?php echo $avaliacao->getComentario(); ?> </strong></p>
             		
                     <?php } ?>
             		

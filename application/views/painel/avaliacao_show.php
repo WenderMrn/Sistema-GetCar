@@ -25,9 +25,9 @@
                         			<h4>Satisfação</h4>
                         			<p class="avaliacao-star">
                                                     <?php 
-                                                    $satisfacao =  $result['satisfacao'];
-                                                    $resto = 5 - $satisfacao;
-                                                    for ($i=0; $i < $satisfacao; $i++) { 
+                                                    
+                                                    $resto = 5 - $avaliacao->getSatisfacao();
+                                                    for ($i=0; $i < $avaliacao->getSatisfacao(); $i++) { 
                                                         echo "<i class=\"glyphicon glyphicon-star\"></i>";
                                                     }
 
@@ -40,13 +40,11 @@
                         		<div class="col-md-9">
                         			<h4>Avaliado por</h4>
                         			<p><?php 
-                                                        foreach ($usuarios as $usuario) {
-                                                            if( $usuario['id'] == $result['usuario_id']){
+                                                        
                                                               
-                                                                echo anchor('painel/usuarios/' . $usuario['id'], $usuario['nome']);
+                                        echo anchor('painel/usuarios/' . $avaliacao->getUsuario()->getId(), $avaliacao->getUsuario()->getNome());
                                                                 
-                                                            }
-                                                        }
+                                                           
                                                     ?></p>
                         		</div>
                         		<div class="col-md-1">
@@ -57,7 +55,7 @@
                         	<div class="row">
                         		<div class="col-md-12">	
                         		<h4>Comentário</h4>
-                        		<p><?php echo $result['comentario']; ?></p>
+                        		<p><?php echo $avaliacao->getComentario(); ?></p>
                         		</div>
                         	</div>
                            

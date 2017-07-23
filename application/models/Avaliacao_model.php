@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Avaliacao_model extends CI_Model {
 
         private $table_name = 'avaliacao';
+        private $Repository;
 
         public $id;
         public $satisfacao;
@@ -14,59 +15,104 @@ class Avaliacao_model extends CI_Model {
         public function __construct()
         {
             parent::__construct();
+            $this->Repository = $this->doctrine->em->getRepository('Entity\Avaliacao');
         }
 
         public function getAll()
         {
-            $query = $this->db->get($this->table_name);
-            return $query->result_array();
+            $avaliacoes = $this->Repository->findAll();
+            return $avaliacoes;
         }
 
         public function getById($id)
         {
-            $query = $this->db->get_where($this->table_name, array('id' => $id)); 
-            return $query->result_array();
+            $avaliacao = $this->Repository->find($id);
+            return $avaliacao;
         }
 
         
 
         public function insert()
         {
-            $this->satisfacao       = $this->input->post('satisfacao');
-            $this->comentario       = $this->input->post('comentario');
-            $this->usuario_id       = $this->session->user['id'];
-            $this->db->insert($this->table_name, $this);
+            $this->load->model('usuario_model');
+
+            $avaliacao = new Entity\Avaliacao();
+
+            $avaliacao->setSatisfacao($this->input->post('satisfacao'));
+            $avaliacao->setComentario($this->input->post('comentario'));
+
+            $usuario = $this->usuario_model->getById($this->session->user['id']);
+
+            if(!$usuario){
+                return false;
+            }
+
+            $avaliacao->setUsuario($usuario);
+
+            $this->doctrine->em->persist($avaliacao);
+            $this->doctrine->em->flush();
+            return true;
         }
 
         public function delete($id = null)
         {
-            if($id !== null){
-                $this->db->where('id', $id);
-                return $this->db->delete($this->table_name);
-            }elseif(isset($_POST['id'])){
-                $this->db->where('id', $_POST['id']);
-                return $this->db->delete($this->table_name);
+            $avaliacao = null;
+
+            if(!is_null($id)){
+                $avaliacao = $this->Repository->find($id);
+            }elseif($this->input->post('id')){
+                $avaliacao = $this->Repository->find($this->input->post('id'));
             }
-            return false;
+
+            if(!$avaliacao){
+                return false;
+            }
+            
+            $this->doctrine->em->remove($avaliacao);
+            $this->doctrine->em->flush();
+            return true;
 
         }
 
         public function update()
         {
-            $this->id               = $this->input->post('id');
-            $this->satisfacao       = $this->input->post('satisfacao');
-            $this->comentario       = $this->input->post('comentario');
-            $this->usuario_id       = $this->input->post('usuario_id');
+            
+            $avaliacao = $this->Repository->find($this->input->post('id'));
 
-            $this->db->update($this->table_name, $this, array('id' => $this->input->post('id')));
+            if(!$avaliacao){
+                return false;
+            }
+
+            $avaliacao->setSatisfacao($this->input->post('satisfacao'));
+            $avaliacao->setComentario($this->input->post('comentario'));
+            
+            $this->doctrine->em->persist($avaliacao);
+            $this->doctrine->em->flush();
+            return true;
+
         }
 
         public function verificar_avaliacao($userid){
-         
-        $query = $this->db->get_where($this->table_name, array('usuario_id' => $userid));
-        $result = $query->result_array();
-        return $result; 
-    }
+            $this->load->model('usuario_model');
+
+            $usuario = $this->usuario_model->getById($userid);
+
+            $data = array('usuario' => $usuario);
+
+            $result = $this->Repository->findOneBy($data);
+            
+            return $result; 
+        }
+
+        public function create(){
+            $avaliacao = new Entity\Avaliacao();
+
+            $avaliacao->setSatisfacao($this->input->post('satisfacao'));
+            $avaliacao->setComentario($this->input->post('comentario'));
+            
+            return $avaliacao;
+
+        }
 
 }
 

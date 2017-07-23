@@ -41,8 +41,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_show', $data);
@@ -60,8 +60,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_edit', $data);
@@ -100,19 +100,20 @@ class Painel_controller extends CI_Controller {
         	redirect('painel/administradores/editar/' . $this->input->post('id'),'refresh');
         }
 
+
+
         $this->session->set_flashdata('errors', validation_errors());
         $this->load->view('templates/panel_template/header');
-		$this->load->view('painel/admin_edit', $this->input->post());
+		$this->load->view('painel/admin_edit', array('admin' => $this->administrador_model->create()));
 		$this->load->view('templates/panel_template/footer');
 
 	}
 
 	public function admin_add(){
-
-		$admin_data = $this->input->post();
+		$this->load->model('administrador_model');
 			
 		$this->load->view('templates/panel_template/header');
-		$this->load->view('painel/admin_add', $admin_data);
+		$this->load->view('painel/admin_add', array('admin' => $this->administrador_model->create()));
 		$this->load->view('templates/panel_template/footer');
 	
 	}
@@ -169,8 +170,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->administrador_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['admin'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/admin_delete', $data);
@@ -214,15 +215,14 @@ class Painel_controller extends CI_Controller {
 		$this->load->model('avaliacao_model');
 		$this->load->model('usuario_model');
 
-		
-		
 		$id = $this->uri->segment(3);
 
 		$data = array();
 		$result = $this->avaliacao_model->getById($id);
-		$data['usuarios'] = $this->usuario_model->getAll();
-		if(!empty($result)){
-			$data['result'] = $result[0];
+		
+		
+		if($result){
+			$data['avaliacao'] = $result;
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/avaliacao_show', $data);
 			$this->load->view('templates/panel_template/footer');
@@ -262,8 +262,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->usuario_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['usuario'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/user_show', $data);
@@ -281,8 +281,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->usuario_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['usuario'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/user_edit', $data);
@@ -332,10 +332,8 @@ class Painel_controller extends CI_Controller {
 
         }
 
-        // redirect('painel/usuarios/editar/' . $this->input->post('id'),'refresh');
-        // $this->user_edit($this->input->post('id'));
         $this->load->view('templates/panel_template/header');
-		$this->load->view('painel/user_edit', $this->input->post());
+		$this->load->view('painel/user_edit', array('usuario' => $this->usuario_model->create()));
 		$this->load->view('templates/panel_template/footer');
 
 
@@ -343,10 +341,10 @@ class Painel_controller extends CI_Controller {
 
 	public function user_add(){
 
-		$user_data = $this->input->post();
+		$this->load->model('usuario_model');
 			
 		$this->load->view('templates/panel_template/header');
-		$this->load->view('painel/user_add', $user_data);
+		$this->load->view('painel/user_add', array('usuario' => $this->usuario_model->create()));
 		$this->load->view('templates/panel_template/footer');
 	
 	}
@@ -422,8 +420,8 @@ class Painel_controller extends CI_Controller {
 		$data = array();
 		$result = $this->usuario_model->getById($id);
 		
-		if(!empty($result)){
-			$data = $result[0];
+		if($result){
+			$data['usuario'] = $result;
 			
 			$this->load->view('templates/panel_template/header');
 			$this->load->view('painel/user_delete', $data);
@@ -494,6 +492,8 @@ class Painel_controller extends CI_Controller {
             ->set_output(json_encode($result));
 		
 	}
+
+	// CREDITAR
 
 	public function credito(){
 	

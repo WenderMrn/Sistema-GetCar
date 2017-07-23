@@ -14,63 +14,72 @@ class Administrador_model extends CI_Model {
 
         public function getAll()
         {
-            $query = $this->db->get('administrador');
-            return $query->result_array();
+
+            $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
+            $administradores = $Repository->findAll();
+            return $administradores;
         }
 
         public function getById($id)
         {
-            // $query = $this->db->get('administrador');
-            $query = $this->db->get_where('administrador', array('id' => $id));
-            return $query->result_array();
+            $administrador = $this->doctrine->em->find('Entity\Administrador', $id);
+            return $administrador;
         }
 
         public function email_check($email){
-            
-            $query = $this->db->select('*')
-                ->where('email', $email)
-                ->get($this->table_name);
 
-            return empty($query->result_array());
+            $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
+            $administrador = $Repository->findOneByEmail($email);
+
+            return is_null($administrador);
         }
 
         public function cpf_check($cpf){
             
-            $query = $this->db->select('*')
-                ->where('cpf', $cpf)
-                ->get($this->table_name);
+            $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
+            $administrador = $Repository->findOneByCpf($cpf);
 
-            return empty($query->result_array());
+            return is_null($administrador);
         }
 
         
         public function insert()
         {
-            $this->nome    = $_POST['nome']; // please read the below note
-            $this->email  = $_POST['email'];
-            $this->cpf     = $_POST['cpf'];
-            $this->senha     = md5($_POST['senha']);
+            $administrador = new Entity\Administrador();
 
-            $this->db->insert('administrador', $this);
+            $administrador->setNome($_POST['nome']);
+            $administrador->setEmail($_POST['email']);
+            $administrador->setCpf($_POST['cpf']);
+            $administrador->setSenha($_POST['senha']);
+
+            $this->doctrine->em->persist($administrador);
+            $this->doctrine->em->flush();
         }
 
         public function delete()
         {
-            $this->db->where('id', $_POST['id']);
-            return $this->db->delete('administrador');
+            $administrador = $this->doctrine->em->find('Entity\Administrador', $_POST['id']);
+            if(!$administrador){
+                return false;
+            }
+            $this->doctrine->em->remove($administrador);
+            $this->doctrine->em->flush();
+            return true;
         }
 
         public function validate(){
-            $this->email  = $_POST['email'];
-            $this->senha  = md5($_POST['senha']);
 
-            // $result = $this->db->get_where(array('email' => $this->email, 'senha' => $this->senha));
-            $result = $this->db->select(array('id', 'nome', 'email'))
-                    ->where(array('email' => $this->email, 'senha' => $this->senha))
-                    ->get('administrador');
+            $data = array('email' => $this->input->post('email'), 'senha' => md5($this->input->post('senha')));
+
+            $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
+            $result = $Repository->findOneBy($data);
             
-            if($result->result_array()){
-                    return $result->result_array()[0];
+            if($result){
+                $data = array();
+                $data['id'] = $result->getId();
+                $data['nome'] = $result->getNome();
+                $data['email'] = $result->getEmail();
+                return $data;
             }
             
             return false;
@@ -79,18 +88,35 @@ class Administrador_model extends CI_Model {
 
         public function update()
         {
-            $this->id     = $this->input->post('id');
-            $this->nome    = $this->input->post('nome'); 
-            $this->email  = $this->input->post('email');
-            $this->cpf     = $this->input->post('cpf');
-            if(!empty($this->input->post('senha'))){
-                    $this->senha = md5($this->input->post('senha'));
-            }else{
-                    $query = $this->db->get_where('administrador', array('id' => $this->input->post('id')));
-                    $this->senha = $query->result_array()[0]['senha'];
+            $Repository = $this->doctrine->em->getRepository('Entity\Administrador');
+            $administrador = $Repository->find($this->input->post('id'));
+
+            if(!$administrador){
+                return false;
             }
 
-            $this->db->update('administrador', $this, array('id' => $this->input->post('id')));
+            $administrador->setNome($_POST['nome']);
+            $administrador->setEmail($_POST['email']);
+            $administrador->setCpf($_POST['cpf']);
+
+            if(!empty($this->input->post('senha'))){
+                $administrador->setSenha(md5($this->input->post('senha')));
+            }
+
+            $this->doctrine->em->persist($administrador);
+            $this->doctrine->em->flush();
+            return true;
+        }
+
+        public function create(){
+            $administrador = new Entity\Administrador();
+
+            $administrador->setNome($this->input->post('nome'));
+            $administrador->setEmail($this->input->post('email'));
+            $administrador->setCpf($this->input->post('cpf'));
+
+            return $administrador;
+
         }
 
 }

@@ -26,12 +26,12 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nome</label>
-                                            <input class="form-control" name="nome" id="nome" value="<?php echo isset($nome)? $nome : '' ?>">
+                                            <input class="form-control" name="nome" id="nome" value="<?php echo $admin->getNome(); ?>">
                                         </div>
                                     
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo isset($cpf)? $cpf : '' ?>">
+                                            <input class="form-control formataCPF" maxlength="14" name="cpf" id="cpf" value="<?php echo $admin->getCpf(); ?>">
                                         </div>
 
                                         
@@ -42,7 +42,7 @@
                                         
                                         <div class="form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo isset($email)? $email : '' ?>">
+                                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $admin->getEmail(); ?>">
                                         </div>
                                     
                                         <div class="form-group">

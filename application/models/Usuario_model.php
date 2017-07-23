@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Usuario_model extends CI_Model {
 
         private $table_name = 'usuario';
+        private $Repository;
 
         public $id;
         public $nome;
@@ -17,98 +18,102 @@ class Usuario_model extends CI_Model {
         public $aprovado;
         public $saldo;
 
+        public function __construct(){
+            parent::__construct();
+            $this->Repository = $this->doctrine->em->getRepository('Entity\Usuario');
+
+        }
+
         public function getAll()
         {
-            $query = $this->db->get('usuario');
-            return $query->result_array();
+            $administradores = $this->Repository->findAll();
+            return $administradores;
         }
 
         public function getPendingUsers()
         {
-            $query = $this->db->get_where('usuario', array('aprovado' => 0));
-            return $query->result_array();
+            $administradores = $this->Repository->findBy(array('aprovado' => 0));
+            return $administradores;
         }
 
         public function getById($id)
         {
-            $query = $this->db->get_where('usuario', array('id' => $id)); 
-            return $query->result_array();
+            $administradores = $this->Repository->find($id);
+            return $administradores;
         }
 
-        public function searchByNameOrCpf($search = 'Usu')
+        public function searchByNameOrCpf($search = '')
         {
-            $query = $this->db->select('*')
-                ->like('nome', $search)
-                ->or_like('cpf', $search)
-                // ->or_where('cpf', $search)
-                ->get($this->table_name);
-            // $query = $this->db->get_where('usuario', array('nome' => $search))->or_where('cpf', $search);
-
-            // var_dump($query->result_array()); exit;
-            return $query->result_array();
-        }
-
-        public function __construct()
-        {
-            parent::__construct();
+            return $this->Repository->createQueryBuilder($this->table_name)
+            ->Where('usuario.nome LIKE :search OR usuario.cpf LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getArrayResult();
         }
 
         public function insert()
         {
-            $this->nome             = $_POST['nome']; // please read the below note
-            $this->email            = $_POST['email'];
-            $this->cpf              = $_POST['cpf'];
-            $this->cep              = $_POST['cep'];
-            $this->cartao_credito   = $_POST['cartao_credito'];
-            $this->endereco         = $_POST['endereco'];
-            $this->aprovado         = 0;
-            $this->senha            = md5($_POST['senha']);
+            $usuario = new Entity\Usuario();
 
-            $this->db->insert($this->table_name, $this);
+            $usuario->setNome($this->input->post('nome'));
+            $usuario->setEmail($this->input->post('email'));
+            $usuario->setCpf($this->input->post('cpf'));
+            $usuario->setCep($this->input->post('cep'));
+            $usuario->setCartaoCredito($this->input->post('cartao_credito'));
+            $usuario->setEndereco($this->input->post('endereco'));
+            $usuario->setAprovado(0);
+            $usuario->setSenha(md5($this->input->post('senha')));
+
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
         }
 
         public function email_check($email){
             
-            $query = $this->db->select('*')
-                ->where('email', $email)
-                ->get($this->table_name);
+            $usuario = $this->Repository->findOneByEmail($email);
 
-            return empty($query->result_array());
+            return is_null($usuario);
         }
 
         public function cpf_check($cpf){
             
-            $query = $this->db->select('*')
-                ->where('cpf', $cpf)
-                ->get($this->table_name);
+            $usuario = $this->Repository->findOneByCpf($cpf);
 
-            return empty($query->result_array());
+            return is_null($usuario);
         }
 
         public function delete($id = null)
         {
-            if($id !== null){
-                $this->db->where('id', $id);
-                return $this->db->delete('usuario');
-            }elseif(isset($_POST['id'])){
-                $this->db->where('id', $_POST['id']);
-                return $this->db->delete('usuario');
-            }
-            return false;
+            $usuario = null;
 
+            if(!is_null($id)){
+                $usuario = $this->Repository->find($id);
+            }elseif($this->input->post('id')){
+                $usuario = $this->Repository->find($this->input->post('id'));
+            }
+
+            if(!$usuario){
+                return false;
+            }
+            
+            $this->doctrine->em->remove($usuario);
+            $this->doctrine->em->flush();
+            return true;
         }
 
         public function validate(){
-            $this->email  = $_POST['email'];
-            $this->senha  = md5($_POST['senha']);
 
-            // $result = $this->db->get_where(array('email' => $this->email, 'senha' => $this->senha));
-            $result = $this->db->select(array('id', 'nome', 'email', 'aprovado'))
-                    ->where(array('email' => $this->email, 'senha' => $this->senha))
-                    ->get('usuario');
+            $data = array('email' => $this->input->post('email'), 'senha' => md5($this->input->post('senha')));
+
+            $result = $this->Repository->findOneBy($data);
             
-            if($result->result_array()){
-                    return $result->result_array()[0];
+            if($result){
+                $data = array();
+                $data['id'] = $result->getId();
+                $data['nome'] = $result->getNome();
+                $data['email'] = $result->getEmail();
+                $data['aprovado'] = $result->getAprovado();
+                return $data;
             }
             
             return false;
@@ -116,50 +121,93 @@ class Usuario_model extends CI_Model {
         }
 
         public function userAccept($id){
-            return $this->db->update('usuario', array('aprovado' => 1), array('id' => $id));
+            $usuario = $this->Repository->find($id);
+
+            if(!$usuario){
+                return false;
+            }
+
+            $usuario->setAprovado(1);
+
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
+
+            return true;
         }
 
         public function userDeny($id){
-            return $this->db->update('usuario', array('aprovado' => 2), array('id' => $id));
+            $usuario = $this->Repository->find($id);
+
+            if(!$usuario){
+                return false;
+            }
+
+            $usuario->setAprovado(2);
+
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
+
+            return true;
         }
 
         public function update()
         {
-            $this->id             = $this->input->post('id');
-            $this->nome             = $this->input->post('nome');
-            $this->email            = $this->input->post('email');
-            $this->cpf              = $this->input->post('cpf');
-            $this->cep              = $this->input->post('cep');
-            $this->cartao_credito   = $this->input->post('cartao_credito');
-            $this->endereco         = $this->input->post('endereco');
 
-            if(!empty($this->input->post('senha'))){
-                    $this->senha = md5($this->input->post('senha'));
-            }else{
-                    $query = $this->db->get_where('usuario', array('id' => $this->input->post('id')));
-                    $this->senha = $query->result_array()[0]['senha'];
+            $usuario = $this->Repository->find($this->input->post('id'));
+
+            if(!$usuario){
+                return false;
             }
 
-            $this->db->update('usuario', $this, array('id' => $this->input->post('id')));
+            $usuario->setNome($this->input->post('nome'));
+            $usuario->setEmail($this->input->post('email'));
+            $usuario->setCpf($this->input->post('cpf'));
+            $usuario->setCep($this->input->post('cep'));
+            $usuario->setCartaoCredito($this->input->post('cartao_credito'));
+            $usuario->setEndereco($this->input->post('endereco'));
+            
+            if(!empty($this->input->post('senha'))){
+                $usuario->setSenha(md5($this->input->post('senha')));
+            }
+
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
+            return true;
+
         }
 
         public function creditar()
         {
-            $id = $_POST['id'];
-            $valor = $_POST['valor'];
+            $usuario = $this->Repository->find($this->input->post('id'));
+
+            $usuario->creditar($this->input->post('valor'));
             
-            $this->db->set('saldo', 'saldo+' . $valor, FALSE);
-            $this->db->where('id', $id);
-            $this->db->update('usuario');
+            $this->doctrine->em->persist($usuario);
+            $this->doctrine->em->flush();
         }
 
 
         public function searchByCpf($search)
         {
-            $query = $this->db->select('id, nome')
-                ->where('cpf', $search)
-                ->get($this->table_name);
-            return $query->result_array();
+            return $this->Repository->createQueryBuilder($this->table_name)
+            ->Where('usuario.cpf LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getArrayResult();
+        }
+
+        public function create(){
+            $usuario = new Entity\Usuario();
+
+            $usuario->setNome($this->input->post('nome'));
+            $usuario->setEmail($this->input->post('email'));
+            $usuario->setCpf($this->input->post('cpf'));
+            $usuario->setCep($this->input->post('cep'));
+            $usuario->setCartaoCredito($this->input->post('cartao_credito'));
+            $usuario->setEndereco($this->input->post('endereco'));
+
+            return $usuario;
+
         }
 
 }

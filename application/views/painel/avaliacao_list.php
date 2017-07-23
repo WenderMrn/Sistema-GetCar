@@ -57,20 +57,19 @@
                                               <div class="caption">
                                                 <h4>
                                                     <?php 
-                                                        $user;
-                                                        foreach ($usuarios as $usuario) {
-                                                            if( $usuario['id'] == $row['usuario_id']){
-                                                                $user = $usuario['nome'];
-                                                            }
-                                                        }
-                                                        echo $user;
+                                                        // $user;
+                                                        // foreach ($usuarios as $usuario) {
+                                                        //     if( $usuario['id'] == $row['usuario_id']){
+                                                        //         $user = $usuario['nome'];
+                                                        //     }
+                                                        // }
+                                                        // echo $user;
                                                     ?>
                                                 </h4>
                                                 <p class="avaliacao-star">
                                                     <?php 
-                                                    $satisfacao =  $row['satisfacao'];
-                                                    $resto = 5 - $satisfacao;
-                                                    for ($i=0; $i < $satisfacao; $i++) { 
+                                                    $resto = 5 - $row->getSatisfacao();
+                                                    for ($i=0; $i < $row->getSatisfacao(); $i++) { 
                                                         echo "<i class=\"glyphicon glyphicon-star\"></i>";
                                                     }
 
@@ -79,13 +78,13 @@
                                                     }
                                                     ?>
                                                 </p>
-                                                <p><?php echo $row['comentario']; ?></p>
-                                                <p><?php echo anchor('painel/avaliacao/' . $row['id'], 'Visualizar', array('class' => 'btn btn-primary')); ?>
+                                                <p><?php echo $row->getComentario(); ?></p>
+                                                <p><?php echo anchor('painel/avaliacao/' . $row->getId(), 'Visualizar', array('class' => 'btn btn-primary')); ?>
                                                     <?php echo anchor('#', 'Deletar', 
                                                         array(
                                                         'class' => 'btn btn-danger',
-                                                        'data-id-avaliacao' =>  $row['id'],
-                                                        'data-nome-user' =>  $user,
+                                                        'data-id-avaliacao' =>  $row->getId(),
+                                                        'data-nome-user' =>  $row->getUsuario()->getNome(),
                                                         'data-toggle' => 'modal',
                                                         'data-target' => '#deleteAvaliacao')); ?>
                                                 </p>
