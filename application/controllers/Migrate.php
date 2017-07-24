@@ -192,7 +192,7 @@ class Migrate extends CI_Controller
                     echo "<h3>Migração avaliacao concluida</h3>";
                 }
 
-                 if ($this->migration->version(4) === FALSE)
+                if ($this->migration->version(4) === FALSE)
                 {
                     show_error($this->migration->error_string());
                 }else{
@@ -214,6 +214,29 @@ class Migrate extends CI_Controller
 
                     $this->db->insert('ponto', $ponto_data);
                     echo "<h3>Migração ponto concluida</h3>";
+                }
+
+                if ($this->migration->version(5) === FALSE)
+                {
+                    show_error($this->migration->error_string());
+                }else{
+
+                    $this->db->truncate('veiculo');
+                    // $this->db->truncate('usuario');
+
+                    $veiculo_data = array(
+                        'placa' => 'KKJ-2547',
+                        'marca' => 'Volkswagen',
+                        'placa' => 'Gol',
+                        'chassi' => 'KHJTGR6453HT762RDP',
+                        'renavam' => '1235478548796',
+                        'categoria' => 'ENTRADA',
+                        'cor' => 'Branco',
+                        'portas' => '4'   
+                    );
+
+                    $this->db->insert('veiculo', $veiculo_data);
+                    echo "<h3>Migração veiculo concluida</h3>";
                 }
 
         }
