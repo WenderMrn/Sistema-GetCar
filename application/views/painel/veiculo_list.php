@@ -71,7 +71,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <?php echo anchor('painel/veiculos/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
+        <?php echo anchor('painel/veiculo/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
         <?php echo anchor('painel/index', 'Voltar', array('class' => 'btn btn-default')); ?>
     </div>
 </div>

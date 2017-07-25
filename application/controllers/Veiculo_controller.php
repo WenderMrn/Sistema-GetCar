@@ -12,9 +12,19 @@ class Veiculo_controller extends CI_Controller {
         }
     }
 
-  public function veiculo_list(){
+    public function veiculo_list(){
 		$this->load->view('templates/panel_template/header');
 		$this->load->view('painel/veiculo_list');
 		$this->load->view('templates/panel_template/footer');  
-	}
+    }
+
+    public function veiculo_add(){
+
+        $veiculo_data = $this->input->post();
+            
+        $this->load->view('templates/panel_template/header');
+        $this->load->view('painel/veiculo_add', $veiculo_data);
+        $this->load->view('templates/panel_template/footer');
+    
+    }
 }

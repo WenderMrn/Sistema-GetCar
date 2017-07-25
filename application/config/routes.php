@@ -103,6 +103,7 @@ $route['painel/pontos/deletar/:num'] = 'ponto_controller/ponto_delete';
 
 //CRUD PONTO DE LOCAÇÃO
 $route['painel/veiculos'] = 'veiculo_controller/veiculo_list';
+$route['painel/veiculo/adicionar'] = 'veiculo_controller/veiculo_add';
 
 //MIGRATION
 $route['migrate'] = 'migrate/index';
