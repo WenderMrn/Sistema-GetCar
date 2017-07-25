@@ -101,8 +101,11 @@ $route['painel/pontos/editar/:num'] = 'ponto_controller/ponto_edit';
 $route['painel/pontos/:num'] = 'ponto_controller/ponto_show';
 $route['painel/pontos/deletar/:num'] = 'ponto_controller/ponto_delete';
 
+//CRUD PONTO DE LOCAÇÃO
+$route['painel/veiculos'] = 'veiculo_controller/veiculo_list';
+
 //MIGRATION
-$route['install'] = 'migrate/index';
+$route['migrate'] = 'migrate/index';
 
 
 $route['404_override'] = '';

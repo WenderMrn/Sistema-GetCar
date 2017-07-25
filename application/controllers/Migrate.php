@@ -222,20 +222,46 @@ class Migrate extends CI_Controller
                 }else{
 
                     $this->db->truncate('veiculo');
-                    // $this->db->truncate('usuario');
 
                     $veiculo_data = array(
                         'placa' => 'KKJ-2547',
                         'marca' => 'Volkswagen',
-                        'placa' => 'Gol',
+                        'modelo' => 'Gol',
                         'chassi' => 'KHJTGR6453HT762RDP',
-                        'renavam' => '1235478548796',
+                        'renavam' => '12121212121',
                         'categoria' => 'ENTRADA',
                         'cor' => 'Branco',
                         'portas' => '4'   
                     );
 
                     $this->db->insert('veiculo', $veiculo_data);
+
+                    $veiculo_data = array(
+                        'placa' => 'OFF-7643',
+                        'marca' => 'Ford',
+                        'modelo' => 'New Fiesta',
+                        'chassi' => 'GRTYU874HYTIMBTJH',
+                        'renavam' => '31313131313',
+                        'categoria' => 'HATCHBACK',
+                        'cor' => 'Azul Califórnia',
+                        'portas' => '4'   
+                    );
+
+                    $this->db->insert('veiculo', $veiculo_data);
+
+                    $veiculo_data = array(
+                        'placa' => 'MON-1010',
+                        'marca' => 'Ford',
+                        'modelo' => 'Focus',
+                        'chassi' => '9JH3YGB352EDIAREN',
+                        'renavam' => '59595959595',
+                        'categoria' => 'HATCHBACK',
+                        'cor' => 'Cinza',
+                        'portas' => '4'   
+                    );
+
+                    $this->db->insert('veiculo', $veiculo_data);
+
                     echo "<h3>Migração veiculo concluida</h3>";
                 }
 
