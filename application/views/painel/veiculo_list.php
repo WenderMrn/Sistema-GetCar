@@ -72,7 +72,7 @@
 <div class="row">
     <div class="col-lg-12">
         <?php echo anchor('painel/veiculo/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
-        <a href="javascript:window.history.go(-1);" class="btn btn-default">Voltar</a>
+        <?php echo anchor('dashboard', 'Voltar', array('class' => 'btn btn-default')); ?>
     </div>
 </div>
 </div>
