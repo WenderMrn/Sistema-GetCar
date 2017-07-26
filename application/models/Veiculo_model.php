@@ -31,7 +31,7 @@ class Veiculo_model extends CI_Model {
   {
 
     $veiculo = new Entity\Veiculo();
-    print_r($_POST);
+   
     $veiculo->setPlaca($_POST['placa']);
     $veiculo->setMarca($_POST['marca']);
     $veiculo->setModelo($_POST['modelo']);
@@ -41,7 +41,7 @@ class Veiculo_model extends CI_Model {
     $veiculo->setRenavam($_POST['renavam']);
     $veiculo->setCor($_POST['cor']);
     $veiculo->setPortas($_POST['portas']);
-    $veiculo->setAtivo($_POST['ativo']);
+    $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
 
     $this->doctrine->em->persist($veiculo);
     $this->doctrine->em->flush();
@@ -60,7 +60,7 @@ class Veiculo_model extends CI_Model {
     $veiculo->setRenavam($_POST['renavam']);
     $veiculo->setCor($_POST['cor']);
     $veiculo->setPortas($_POST['portas']);
-    $veiculo->setAtivo($_POST['ativo']);
+    $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
 
     return $veiculo;
 
@@ -81,7 +81,7 @@ class Veiculo_model extends CI_Model {
     $veiculo->setRenavam($_POST['renavam']);
     $veiculo->setCor($_POST['cor']);
     $veiculo->setPortas($_POST['portas']);
-    $veiculo->setAtivo($_POST['ativo']);
+    $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
 
     $this->doctrine->em->persist($veiculo);
     $this->doctrine->em->flush();

@@ -16,7 +16,7 @@ class Veiculo
     protected $id;
 
     /**
-     * @Column(type="string", name="placa")
+     * @Column(type="string", name="placa",unique=true)
     */
     protected $placa;
 
@@ -41,12 +41,12 @@ class Veiculo
     protected $categoria;
 
     /**
-     * @Column(type="string", name="chassi")
+     * @Column(type="string", name="chassi",unique=true)
     */
     protected $chassi;
 
     /**
-     * @Column(type="string", name="renavam")
+     * @Column(type="string", name="renavam", unique=true)
     */
     protected $renavam;
 
@@ -61,7 +61,7 @@ class Veiculo
     protected $portas;
 
     /**
-     * @Column(type="boolean", name="ativo", nullable=false)
+     * @Column(type="integer", name="ativo")
     */
     protected $ativo;
 

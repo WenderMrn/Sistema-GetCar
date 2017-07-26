@@ -53,6 +53,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //HOME
 $route['default_controller'] = 'home_controller';
 
+//DASHBOARD
+$route['dashboard'] = 'painel_controller/index';
+
 //AUTENTICACAO
 $route['login'] = 'autenticacao_controller/login';
 $route['logoff'] = 'autenticacao_controller/logoff';

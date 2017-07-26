@@ -26,7 +26,7 @@ class Migration_Add_veiculo extends CI_Migration {
                                 'constraint' => '200',
                         ),
                         'ano' => array(
-                                'type' => 'DATETIME'
+                                'type' => 'DATE'
                         ),
                         'categoria' => array(
                                 'type' => 'VARCHAR',
@@ -49,7 +49,8 @@ class Migration_Add_veiculo extends CI_Migration {
                                 'constraint' => 5,
                         ),
                         'ativo' => array(
-                                'type' => 'BOOLEAN'
+                                'type' => 'INT',
+                                'constraint' => 5,
                         )
                         
                 ));

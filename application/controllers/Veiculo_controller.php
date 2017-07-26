@@ -34,11 +34,11 @@ class Veiculo_controller extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('placa', 'Placa', 'required',
+        $this->form_validation->set_rules('placa', 'Placa', 'required|exact_length[8]',
             array('valida_placa' => 'Placa inválida.')
         );
 
-        $this->form_validation->set_rules('renavam', 'RENAVAM', 'required',
+        $this->form_validation->set_rules('renavam', 'RENAVAM', 'required|exact_length[11]|numeric',
             array('valida_renavam' => 'RENAVAM inválido.')
         );
 
@@ -46,16 +46,11 @@ class Veiculo_controller extends CI_Controller {
             array('valida_modelo' => 'Modelo inválido.')
         );
 
-        $this->form_validation->set_rules('placa', 'Placa', 'required',
-            array('valida_placa' => 'Placa inválida.')
-        );
-
-
         $this->form_validation->set_rules('categoria', 'Categoria', 'required',
             array('valida_categoria' => 'Categoria inválida.')
         );
 
-        $this->form_validation->set_rules('marca', 'marca', 'required',
+        $this->form_validation->set_rules('marca', 'Marca', 'required',
             array('valida_marca' => 'Marca inválido.')
         );
 
@@ -63,12 +58,16 @@ class Veiculo_controller extends CI_Controller {
             array('valida_cor' => 'Cor inválido.')
         );
 
-        $this->form_validation->set_rules('chassi', 'Chassi', 'required',
+        $this->form_validation->set_rules('chassi', 'Chassi', 'required|exact_length[17]',
             array('valida_chassi' => 'Chassi inválido.')
         );
 
         $this->form_validation->set_rules('portas', 'Portas', 'required',
             array('valida_portas' => 'Portas inválido.')
+        );
+
+        $this->form_validation->set_rules('ano', 'Ano', 'required',
+            array('valida_ano' => 'Ano inválido.')
         );
         
         if ($this->form_validation->run() == TRUE){

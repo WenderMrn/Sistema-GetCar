@@ -25,9 +25,11 @@
                         <?php echo form_open('veiculo_controller/veiculo_add_post'); ?>
                         <div class="col-lg-12">
                             <a href="">
-                               <!-- <img src="<?php echo base_url('/assets/img/default-car'); ?>" class="img-rounded" height="350" alt="carro exemplo">-->
-                               <div class="imagem-veiculo" style="background: url(<?php echo base_url('/assets/img/default-car'); ?>) no-repeat bottom center scroll;">
-                                    Alterar Imagem
+                               <div class="col-lg-6"> 
+                                   <!-- <img src="<?php echo base_url('/assets/img/default-car'); ?>" class="img-rounded" height="350" alt="carro exemplo">-->
+                                   <div class="imagem-veiculo" style="background: url(<?php echo base_url('/assets/img/default-car'); ?>) no-repeat bottom center scroll;">
+                                        Alterar Imagem
+                                   </div>
                                </div>
                             </a>
                         </div>
@@ -45,7 +47,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-2">    
+                        <div class="col-lg-3">    
                             <div class="form-group">
                                 <label>Modelo</label>
                                 <input class="form-control" name="modelo" id="modelo" value="<?php echo isset($modelo)? $modelo : '' ?>">
@@ -100,15 +102,13 @@
                                 <label>Ano</label>
                                 <input type="date" class="form-control date-mask" name="ano" id="ano" value="<?php echo isset($ano)? $ano : '' ?>">
                             </div>
-
+                            
                             <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10" style="margin-top: 20px;">
-                                  <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="ativo" id="ativo" value="<?php echo isset($ativo)? '1' : '0' ?>"> Ativo
-                                        </label>
-                                    </div>
-                                </div>
+                                <label>Ativo</label>
+                                <select class="form-control" name="ativo" id="ativo" value="<?php echo isset($ativo)? $ativo : '' ?>">
+                                    <option value"1">Sim</option>
+                                    <option value"0">Não</option>
+                                </select>
                             </div>
 
                   </div>

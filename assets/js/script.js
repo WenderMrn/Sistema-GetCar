@@ -183,7 +183,7 @@ $(".placa-veiculo-mask").on('keyup keypress focusout', function(e) {
     
     if(input)
         input.value = input.value.toUpperCase();
-
+  
     VMasker(input).maskPattern("AAA-9999");   
 });
 
