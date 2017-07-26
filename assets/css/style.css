@@ -1,0 +1,7 @@
+.imagem-veiculo{
+	height: 180px;
+	width: 300px;
+	background-size: 300px 200px !important;
+	float: auto;
+	margin-left: 50px; 
+}

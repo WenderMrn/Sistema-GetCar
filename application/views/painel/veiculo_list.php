@@ -6,7 +6,7 @@
             <h1 class="page-header">Veículos</h1>
         </div>
         <div class="col-lg-12">
-            <h4>Conheça nossos veículos</h4> 
+            <h4>Conheça Nossos Veículos</h4> 
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -72,7 +72,7 @@
 <div class="row">
     <div class="col-lg-12">
         <?php echo anchor('painel/veiculo/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
-        <?php echo anchor('painel/index', 'Voltar', array('class' => 'btn btn-default')); ?>
+        <a href="javascript:window.history.go(-1);" class="btn btn-default">Voltar</a>
     </div>
 </div>
 </div>

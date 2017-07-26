@@ -19,6 +19,9 @@ issues, as well as missing features.
 - [Codeigniter](https://codeigniter.com/)
 - [DOCTRINE](http://www.doctrine-project.org/)
 
+## Máscara de input em javascript puro
+- [Vanilla-Masker](https://github.com/vanilla-masker/vanilla-masker)
+
 ## Installation
 
 Instalação...

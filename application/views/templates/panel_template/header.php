@@ -21,6 +21,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php echo link_tag('vendor/components/metismenu/dist/metisMenu.min.css'); ?>
     <?php echo link_tag('assets/css/sb-admin-2.css'); ?>
     <?php echo link_tag('assets/css/morris.css'); ?>
+      <!-- Custom CSS -->
+    <?php echo link_tag('assets/css/style.css'); ?>
     <!-- <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Custom Fonts -->

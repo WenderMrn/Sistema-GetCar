@@ -165,7 +165,7 @@ $('#deleteAvaliacao').on('show.bs.modal', function (event) {
   var modal = $(this);
   modal.find('.modal-body input').val(id);
   modal.find('.modal-body strong').text(nome);
-})
+});
 
 //modal para deletar ponto
 $('#deletePonto').on('show.bs.modal', function (event) {
@@ -175,4 +175,39 @@ $('#deletePonto').on('show.bs.modal', function (event) {
   var modal = $(this);
   modal.find('.modal-body input').val(id);
   modal.find('.modal-body strong').text(nome);
-})
+});
+
+$(".placa-veiculo-mask").on('keyup keypress focusout', function(e) {
+
+    var input = document.querySelector(".placa-veiculo-mask");
+    
+    if(input)
+        input.value = input.value.toUpperCase();
+
+    VMasker(input).maskPattern("AAA-9999");   
+});
+
+$(".renavam-mask").on('keyup keypress focusout', function(e) {
+    var input = document.querySelector(".renavam-mask");
+
+   VMasker(input).maskPattern("99999999999"); 
+});
+
+$(".chassi-mask").on('keyup keypress focusout', function(e) {
+    
+    var input = document.querySelector(".chassi-mask");
+    
+    if(input){
+        exp = /\Q|\I|\O|\q|\i|\o/g;
+        input.value = input.value.toUpperCase().toString().replace(exp,"");
+    }
+       
+    VMasker(input).maskPattern("SSSSSSSSSSSSSSSSS"); 
+});
+$(".date-mask").on('keyup keypress focusout', function(e) {
+    //VMasker(document.querySelector(".date-mask")).maskPattern("99/99/9999");   // -> 12/12/2000
+});
+
+$(".number-mask").on('keyup keypress focusout', function(e) {
+    VMasker(document.querySelector(".number-mask")).maskNumber();  
+});

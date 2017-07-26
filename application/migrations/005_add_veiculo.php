@@ -50,10 +50,6 @@ class Migration_Add_veiculo extends CI_Migration {
                         ),
                         'ativo' => array(
                                 'type' => 'BOOLEAN'
-                        ),
-                        'proprietario' => array(
-                                'type' => 'INT',
-                                'constraint' => 5,
                         )
                         
                 ));

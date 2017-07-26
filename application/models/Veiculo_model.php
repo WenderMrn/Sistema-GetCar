@@ -5,12 +5,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Veiculo_model extends CI_Model {
-  
+
+  private $table_name = 'veiculo';
+  private $Repository;
+
+  public $id;
+  public $placa;
+  public $marca;
+  public $modelo;
+  public $ano;
+  public $categoria;
+  public $chassi;
+  public $renavam;
+  public $cor;
+  public $portas;
+  public $ativo;
+
+  public function __construct(){
+    parent::__construct();
+    $this->Repository = $this->doctrine->em->getRepository('Entity\Veiculo');
+
+  }
+
   public function insert()
   {
 
     $veiculo = new Entity\Veiculo();
-
+    print_r($_POST);
     $veiculo->setPlaca($_POST['placa']);
     $veiculo->setMarca($_POST['marca']);
     $veiculo->setModelo($_POST['modelo']);
@@ -24,6 +45,24 @@ class Veiculo_model extends CI_Model {
 
     $this->doctrine->em->persist($veiculo);
     $this->doctrine->em->flush();
+
+  }
+
+  public function create(){
+    $veiculo = new Entity\Veiculo();
+
+    $veiculo->setPlaca($_POST['placa']);
+    $veiculo->setMarca($_POST['marca']);
+    $veiculo->setModelo($_POST['modelo']);
+    $veiculo->setAno($_POST['ano']);
+    $veiculo->setCategoria($_POST['categoria']);
+    $veiculo->setChassi($_POST['chassi']);
+    $veiculo->setRenavam($_POST['renavam']);
+    $veiculo->setCor($_POST['cor']);
+    $veiculo->setPortas($_POST['portas']);
+    $veiculo->setAtivo($_POST['ativo']);
+
+    return $veiculo;
 
   }
 
