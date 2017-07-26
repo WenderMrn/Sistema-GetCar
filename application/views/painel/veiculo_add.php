@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Preencha os dados do Veículo abaixo.
+                    Preencha abaixo os dados do Veículo.
                 </div>
 
                 <div class="panel-body">
@@ -102,7 +102,7 @@
                                 <label>Ano</label>
                                 <input type="date" class="form-control date-mask" name="ano" id="ano" value="<?php echo isset($ano)? $ano : '' ?>">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Ativo</label>
                                 <select class="form-control" name="ativo" id="ativo" value="<?php echo isset($ativo)? $ativo : '' ?>">
