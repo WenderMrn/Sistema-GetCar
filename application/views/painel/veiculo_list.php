@@ -12,24 +12,24 @@
     </div>
     <div class="row">
         <?php if($this->session->flashdata('success')): ?>
-        <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
-    <?php endif; ?>
-    <?php if($this->session->flashdata('errors')): ?>
-    <div class="alert alert-success"><?php echo $this->session->flashdata('errors'); ?></div>
-<?php endif; ?>
+            <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('errors')): ?>
+            <div class="alert alert-success"><?php echo $this->session->flashdata('errors'); ?></div>
+        <?php endif; ?>
 </div>
 
 <div class="row">
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item active">
-        <a class="nav-link" data-toggle="tab" href="#av_sistema" role="tab">Todos Veículos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#av_veiculo" role="tab">Meus Veículos</a>
-    </li>
-</ul>
+   <!-- <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item <?php ($this->uri->segment(3)!='me')?'active':''; ?>">
+            <a class="nav-link" href="<?php echo base_url("painel/veiculos"); ?>">Todos Veículos</a>
+        </li>
+        <li class="nav-item <?php ($this->uri->segment(3)=='me')?'active':''; ?>">
+            <a class="nav-link" href="<?php echo base_url("painel/veiculos/me"); ?>">Meus Veículos</a>
+        </li>
+    </ul> -->
 <div class="tab-content">
-  <div class="tab-pane active" id="allusers" role="tabpanel">
+  <div class="tab-pane active" id="todos_veiculos" role="tabpanel">
       <!-- /.row -->
       <div class="row">
         <div class="col-lg-12">
@@ -68,49 +68,49 @@
                               </div> 
                           </div>
                           <div class="row">
-                           <div class="col-md-6">
-                            <dl>
-                                <dt>Modelo</dt>
-                                <dd><?php echo $veiculo->getModelo(); ?></dd>
+                             <div class="col-md-6">
                                 <dl>
-                                </div>
-                                <div class="col-md-6">
+                                    <dt>Modelo</dt>
+                                    <dd><?php echo $veiculo->getModelo(); ?></dd>
                                     <dl>
-                                        <dt>Nº Portas</dt>
-                                        <dd><?php echo $veiculo->getPortas(); ?></dd>
-                                        <dl>
-                                        </div> 
                                     </div>
-                                    <p><?php echo anchor('#' . $veiculo->getId(), 'Visualizar', array('class' => 'btn btn-primary')); ?>
-                                        <?php echo anchor('#', 'Deletar', 
-                                            array(
-                                                'class' => 'btn btn-danger',
-                                                'data-id-avaliacao' =>  $veiculo->getId(),
-                                                'data-toggle' => 'modal',
-                                                'data-target' => '#deleteAvaliacao')); ?>
-                                            </p>
+                                    <div class="col-md-6">
+                                        <dl>
+                                            <dt>Nº Portas</dt>
+                                            <dd><?php echo $veiculo->getPortas(); ?></dd>
+                                            <dl>
+                                            </div> 
+                                        </div>
+                                        <p><?php echo anchor('#' . $veiculo->getId(), 'Visualizar', array('class' => 'btn btn-primary')); ?>
+                                            <?php echo anchor('#', 'Deletar', 
+                                                array(
+                                                    'class' => 'btn btn-danger',
+                                                    'data-id-avaliacao' =>  $veiculo->getId(),
+                                                    'data-toggle' => 'modal',
+                                                    'data-target' => '#deleteAvaliacao')); ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php endforeach; ?>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <?php echo anchor('painel/veiculo/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
-                                    <?php echo anchor('dashboard', 'Voltar', array('class' => 'btn btn-default')); ?>
+                                <?php endforeach; ?>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <?php echo anchor('painel/veiculo/adicionar', 'Novo Veículo', array('class' => 'btn btn-primary')); ?>
+                                        <?php echo anchor('dashboard', 'Voltar', array('class' => 'btn btn-default')); ?>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- /.panel-body -->
                         </div>
-                        <!-- /.panel-body -->
+                        <!-- /.panel -->
                     </div>
-                    <!-- /.panel -->
-                </div>
-                <!-- /.col-lg-6 -->
+                    <!-- /.col-lg-6 -->
 
-                <!-- /.col-lg-6 -->
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
         </div>
-    </div>
-</div>
+  </div>
 </div>
         <!-- /#page-wrapper -->

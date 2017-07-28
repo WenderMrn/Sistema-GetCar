@@ -23,6 +23,16 @@ class Veiculo_controller extends CI_Controller {
        
     }
 
+     public function user_veiculo_list(){
+
+        $this->load->model('veiculo_model');
+        $data['veiculos'] = $this->veiculo_model->getAllByUser();
+        $this->load->view('templates/panel_template/header');
+        $this->load->view('painel/veiculo_list',$data);
+        $this->load->view('templates/panel_template/footer');
+       
+    }
+
     public function veiculo_add(){
 
         $veiculo_data = $this->input->post();

@@ -42,7 +42,11 @@ class Veiculo_model extends CI_Model {
     $veiculo->setCor($_POST['cor']);
     $veiculo->setPortas($_POST['portas']);
     $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
+    var_dump($this->session->userdata('admin'));
 
+    if($this->session->userdata('user'))
+      $veiculo->setProprietario($this->session->userdata('user')['id']);
+       
     $this->doctrine->em->persist($veiculo);
     $this->doctrine->em->flush();
 
@@ -61,6 +65,9 @@ class Veiculo_model extends CI_Model {
     $veiculo->setCor($_POST['cor']);
     $veiculo->setPortas($_POST['portas']);
     $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
+
+    if($this->session->userdata('user'))
+      $veiculo->setProprietario($this->session->userdata('user')['id']);
 
     return $veiculo;
 
@@ -83,6 +90,9 @@ class Veiculo_model extends CI_Model {
     $veiculo->setPortas($_POST['portas']);
     $veiculo->setAtivo(isset($_POST['ativo'])?1:0);
 
+    if($this->session->userdata('user'))
+      $veiculo->setProprietario($this->session->userdata('user')['id']);
+
     $this->doctrine->em->persist($veiculo);
     $this->doctrine->em->flush();
 
@@ -91,6 +101,13 @@ class Veiculo_model extends CI_Model {
   public function getAll() 
   {
     $veiculos = $this->Repository->findAll();
+    return $veiculos;
+  }
+
+  public function getAllByUser(){
+    $veiculos = array();
+    if($this->session->userdata('user'))
+        $veiculos = $this->db->get_where('veiculo', array('usuario_id' =>  $this->Repository->getProprietario()));
     return $veiculos;
   }
 

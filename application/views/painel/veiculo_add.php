@@ -102,15 +102,15 @@
                                 <label>Ano</label>
                                 <input type="date" class="form-control date-mask" name="ano" id="ano" value="<?php echo isset($ano)? $ano : '' ?>">
                             </div>
-
-                            <div class="form-group">
-                                <label>Ativo</label>
-                                <select class="form-control" name="ativo" id="ativo" value="<?php echo isset($ativo)? $ativo : '' ?>">
-                                    <option value"1">Sim</option>
-                                    <option value"0">Não</option>
-                                </select>
-                            </div>
-
+                            <?php if ($this->session->userdata('admin')):?>
+                               <div class="form-group">
+                                    <label>Ativo</label>
+                                    <select class="form-control" name="ativo" id="ativo" value="<?php echo isset($ativo)? $ativo : '' ?>">
+                                        <option value"1">Sim</option>
+                                        <option value"0">Não</option>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
                   </div>
                   <div class="col-lg-12">     
                     <div class="row">

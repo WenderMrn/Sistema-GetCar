@@ -51,6 +51,11 @@ class Migration_Add_veiculo extends CI_Migration {
                         'ativo' => array(
                                 'type' => 'INT',
                                 'constraint' => 5,
+                        ),
+                        'usuario_id' => array(
+                                'type' => 'INT',
+                                'constraint' => 5,
+                                'null' => TRUE,
                         )
                         
                 ));

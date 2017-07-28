@@ -262,6 +262,32 @@ class Migrate extends CI_Controller
 
                     $this->db->insert('veiculo', $veiculo_data);
 
+                    $veiculo_data = array(
+                        'placa' => 'WOL-5555',
+                        'marca' => 'Volkswagen',
+                        'modelo' => 'Fusca',
+                        'chassi' => '5KT3CGR352EDIVREP',
+                        'renavam' => '87964123587',
+                        'categoria' => 'HATCHBACK',
+                        'cor' => 'Verde',
+                        'portas' => '2'   
+                    );
+
+                    $this->db->insert('veiculo', $veiculo_data);
+
+                    $veiculo_data = array(
+                        'placa' => 'KKK-7777',
+                        'marca' => 'Volkswagen',
+                        'modelo' => 'Fusca',
+                        'chassi' => '52EDIGR356TR097YH',
+                        'renavam' => '87965959595',
+                        'categoria' => 'HATCHBACK',
+                        'cor' => 'Preto',
+                        'portas' => '2'   
+                    );
+
+                    $this->db->insert('veiculo', $veiculo_data);
+
                     echo "<h3>Migração veiculo concluida</h3>";
                 }
 

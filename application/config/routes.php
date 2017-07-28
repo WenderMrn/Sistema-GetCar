@@ -106,6 +106,7 @@ $route['painel/pontos/deletar/:num'] = 'ponto_controller/ponto_delete';
 
 //CRUD PONTO DE VEÍCULOS
 $route['painel/veiculos'] = 'veiculo_controller/veiculo_list';
+$route['painel/veiculos/me'] = 'veiculo_controller/veiculo_list';
 $route['painel/veiculo/adicionar'] = 'veiculo_controller/veiculo_add';
 $route['painel/veiculo/create'] = 'veiculo_controller/veiculo_add_post';
 

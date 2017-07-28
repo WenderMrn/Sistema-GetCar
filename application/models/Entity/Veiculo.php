@@ -65,6 +65,12 @@ class Veiculo
     */
     protected $ativo;
 
+    /**
+     * @OneToOne(targetEntity="Usuario")
+     * @JoinColumn(name="usuario_id", referencedColumnName="id",nullable=true)
+    */
+    protected $proprietario;
+
     public function getId(){
     	return $this->id;
     }
@@ -153,12 +159,12 @@ class Veiculo
     	$this->ativo = $ativo;
     }
 
-    /*public function getProprietario(){
+    public function getProprietario(){
     	return $this->proprietario;
     }
 
     public function setProprietario($proprietario){
     	$this->proprietario = $proprietario;
-    }*/	
+    }	
 
 }
