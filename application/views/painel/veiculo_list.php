@@ -38,24 +38,53 @@
 
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <div class="row" style="margin: 5px;">
-                            <div class="col-lg-6 col-lg-offset-6 text-right">
-
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table id="user_result" class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php foreach ($veiculos as $veiculo): ?>
+                                <div class="col-md-4">
+                                    <div class="thumbnail">
+                                        <div class="caption">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <img src="<?php echo base_url('/assets/img/default-car'); ?>" class="img-responsive" height="120" alt="carro exemplo">
+                                                </div>
+                                               <div class="col-md-6">
+                                                    <dl>
+                                                      <dt>Marca</dt>
+                                                      <dd> <?php echo $veiculo->getMarca(); ?></dd>
+                                                    </dl>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <dl>
+                                                      <dt>Cor</dt>
+                                                      <dd><?php echo $veiculo->getCor(); ?></dd>
+                                                    </dl>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                               <div class="col-md-6">
+                                                    <dl>
+                                                        <dt>Modelo</dt>
+                                                        <dd><?php echo $veiculo->getModelo(); ?></dd>
+                                                    <dl>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <dl>
+                                                        <dt>Nº Portas</dt>
+                                                        <dd><?php echo $veiculo->getPortas(); ?></dd>
+                                                    <dl>
+                                                </div> 
+                                            </div>
+                                            <p><?php echo anchor('#' . $veiculo->getId(), 'Visualizar', array('class' => 'btn btn-primary')); ?>
+                                                <?php echo anchor('#', 'Deletar', 
+                                                    array(
+                                                        'class' => 'btn btn-danger',
+                                                        'data-id-avaliacao' =>  $veiculo->getId(),
+                                                        'data-toggle' => 'modal',
+                                                        'data-target' => '#deleteAvaliacao')); ?>
+                                            </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <?php endforeach; ?>
 
                     </div>
                     <!-- /.panel-body -->

@@ -90,10 +90,7 @@ class Veiculo_model extends CI_Model {
 
   public function getAll() 
   {
-
-    $Repository = $this->doctrine->em->getRepository('Entity\Veiculo');
-    $veiculos = $Repository->findAll();
-
+    $veiculos = $this->Repository->findAll();
     return $veiculos;
   }
 

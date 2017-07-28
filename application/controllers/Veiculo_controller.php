@@ -13,9 +13,14 @@ class Veiculo_controller extends CI_Controller {
     }
 
     public function veiculo_list(){
+
+        $this->load->model('veiculo_model');
+        $data['veiculos'] = $this->veiculo_model->getAll();
+
 		$this->load->view('templates/panel_template/header');
-		$this->load->view('painel/veiculo_list');
-		$this->load->view('templates/panel_template/footer');  
+		$this->load->view('painel/veiculo_list',$data);
+		$this->load->view('templates/panel_template/footer');
+       
     }
 
     public function veiculo_add(){
